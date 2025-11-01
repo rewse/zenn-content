@@ -11,11 +11,11 @@ published: true
 ---
 ## TL;DR:
 
-ハードリンクを多用するバックアップツールがBtrfsファイルシステムのメタデータ領域を圧迫していました。メタデータ領域不足による書き込みエラーを、不要なバックアップセットを削除して領域を解放することで解決しました。
+ハードリンクを多用するバックアップツールがBtrfsファイルシステムのメタデータ領域を圧迫していました。不要なバックアップセットを削除して領域を解放することで、、タデータ領域不足による書き込みエラーを解決しました。
 
 ## 問題の発生
 
-Synology DS-916+ NAS へのMacからの Time Machine バックアップやUbuntuからのNFSコピーがたびたび失敗するようになったので、DS-916+にSSHログインして原因調査してみました。
+Synology NAS DS-916+ へのMacからの Time Machine バックアップやUbuntuからのNFSコピーがたびたび失敗するようになったので、DS-916+にSSHログインして原因調査してみました。
 
 ## 原因調査
 
@@ -40,7 +40,7 @@ tats@guppy:/volume1$ sudo touch dummy
 touch: cannot touch 'dummy': No space left on device
 ```
 
-バックアップ先の `/volume1` は64%しか使用していないにもかかわらず `No space left on device` エラーが起きます。`touch` コマンドは0byteのファイルを作成するにもかかわらず失敗するということは、実際には容量不足ではなさそうです。
+バックアップ先の`/volume1`は64%しか使用していないにもかかわらず `No space left on device` エラーが起きます。`touch`コマンドは0byteのファイルを作成するにもかかわらず失敗するということは、実際には容量不足ではなさそうです。
 
 ### inode確認
 
@@ -67,7 +67,7 @@ tmpfs                  1011641   150 1011491    1% /tmp
 
 ### メタデータ領域の確認
 
-Btrfsファイルシステムでは`btrfs`コマンドでファイルシステムの状況を確認してみます。
+Btrfsファイルシステムは`btrfs`コマンドで使用状況の詳細を確認できます。
 
 ```sh
 tats@guppy:/volume1$ sudo btrfs filesystem df /volume1
@@ -90,8 +90,7 @@ Btrfsでは、実際のファイルデータとは別に「メタデータ」と
 私はUbuntuのバックアップに [Rsync time backup](https://github.com/laurent22/rsync-time-backup) というツールを使っています。このツールは各バックアップセット間で変更のないファイルはハードリンクを使用しています。そのため容量は多重で消費しないものの、inodeは100個のバックアップセットがあったら100倍使用します。これがinodeを多量に消費している可能性が高いため、3分の1程度のバックアップセットを削除してみました。その後、ファイルシステムの状況を再度確認してみます。
 
 ```sh
-tats@guppy:/volume1/@Backup@$ sudo btrfs filesystem df /volume1
-Password:
+tats@guppy:/volume1$ sudo btrfs filesystem df /volume1
 Data, single: total=3.41TiB, used=2.20TiB
 System, DUP: total=8.00MiB, used=112.00KiB
 Metadata, DUP: total=112.99GiB, used=76.92GiB
@@ -102,12 +101,12 @@ GlobalReserve, single: total=2.00GiB, used=0.00B
 
 ## 予防策: Rsync time backup の設定変更
 
-Rsync time backup は `--strategy` オプションで有効期限とバックアップセット数を設定できます。デフォルトは `"1:1 30:7 365:30"` で、これは「1日後は1日に1個のバックアップセットのみ維持する。30日後は7日に1個のバックアップセットのみ維持する。365日後は30日に1個のバックアップセットを維持する」の意味です。週次のバックアップセットは1年分もいらないので、これを3カ月分に変更しました。
+Rsync time backup は`--strategy`オプションで有効期限とバックアップセット数を設定できます。デフォルトは `"1:1 30:7 365:30"` で、これは「1日後は1日に1個のバックアップセットのみ維持する。30日後は7日に1個のバックアップセットのみ維持する。365日後は30日に1個のバックアップセットを維持する」の意味です。週次のバックアップセットは1年分もいらないので、これを3カ月分に変更しました。
 
 ```sh
 nice -n 10 \
-tmbackup --strategy "1:1 30:7 90:30" \
-$src $dest /etc/tmbackup.exclude > /dev/null
+  tmbackup --strategy "1:1 30:7 90:30" \
+  $src $dest /etc/tmbackup.exclude > /dev/null
 ```
 
 ## まとめ
