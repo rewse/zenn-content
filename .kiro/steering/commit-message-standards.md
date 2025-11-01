@@ -185,3 +185,18 @@ Closes #123
 - `update [dependency/config/documentation]`
 - `remove [deprecated/unused/obsolete] [item]`
 - `improve [performance/readability/structure]`
+
+## Git コマンドの注意点
+
+### git diff の使用時
+`git diff` を使用してステージされた変更を確認する場合は、必ず `cat` コマンドをパイプして使用する：
+
+```bash
+# 推奨: catをパイプして使用
+git diff | cat
+
+# 非推奨: 直接実行
+git diff
+```
+
+この方法により、差分の内容が適切に表示され、コミットメッセージ作成時の参考情報として活用できる。
