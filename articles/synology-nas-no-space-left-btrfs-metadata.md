@@ -97,7 +97,7 @@ Metadata, DUP: total=112.99GiB, used=76.92GiB
 GlobalReserve, single: total=2.00GiB, used=0.00B
 ```
 
-メタデータ領域の空き容量が36GBほど増え、問題なくファイルが作成できるようになりました。
+メタデータ領域の使用量が109.38GBから76.92GBに減り、問題なくファイルが作成できるようになりました。
 
 ## 予防策: Rsync time backup の設定変更
 
