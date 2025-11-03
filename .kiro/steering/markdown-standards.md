@@ -1,6 +1,8 @@
 ---
 inclusion: fileMatch
-fileMatchPattern: ['articles/*.md']
+fileMatchPattern: 
+  - 'articles/*.md'
+  - 'books/**/*.md'
 ---
 
 # Zennコンテンツ用Markdownスタンダード
