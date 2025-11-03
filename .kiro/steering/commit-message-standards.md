@@ -186,6 +186,26 @@ Closes #123
 - `remove [deprecated/unused/obsolete] [item]`
 - `improve [performance/readability/structure]`
 
+### 文章の単語レベル変更に関するルール
+文章の修正や改善を行う場合の記述方法：
+
+#### タイトル（英語）
+- 文字数制限を考慮して抽象的表現を許容する
+- 例: `improve readability`, `fix typos`, `update wording`
+
+#### 本文（英語）
+- 修正点を具体的に記述し、抽象的表現は避ける
+- 日本語の修正内容は英語に変換せず、日本語のまま記述する
+- 例:
+  ```
+  docs: improve article readability
+  
+  Fix specific wording issues:
+  - 「設定を行う」→「設定する」
+  - 「実行を行います」→「実行します」
+  - Remove redundant expressions in technical explanations
+  ```
+
 ## Git コマンドの注意点
 
 ### git diff の使用時
