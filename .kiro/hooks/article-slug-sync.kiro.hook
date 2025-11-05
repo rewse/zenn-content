@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Image Folder Synchronization When Changing Article Slugs",
+  "description": "articlesフォルダー内の記事ファイル名（Slug）が変更されたとき、imagesフォルダー内の対応するSlug名フォルダーも同様に変更する",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "articles/*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "articlesフォルダー内の記事ファイル名が変更されました。変更前後のファイル名を確認し、imagesフォルダー内に対応するSlug名のフォルダーが存在する場合は、そのフォルダー名も新しいSlug名に変更してください。"
+  }
+}
