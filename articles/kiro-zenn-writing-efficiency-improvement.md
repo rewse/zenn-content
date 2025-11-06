@@ -36,7 +36,7 @@ Kiroを https://kiro.dev/ からダウンロードして初期セットアップ
 ![Kiroのプロジェクト選択ダイアログ](/images/kiro-zenn-writing-efficiency-improvement/kiro-open-project-dialog.png)
 
 :::message
-KiroのUIを日本語に変更したい場合は View > Command Palette... メニューを開き、`Configure Display Language` を検索して、日本語を選びます。
+KiroのUIを日本語に変更したい場合は `View > Command Palette...` メニューを開き、`Configure Display Language` を検索して、日本語を選びます。
 :::
 
 ### Kiroの機能を理解する
@@ -209,9 +209,11 @@ inclusion: always
 コミットメッセージは [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) に従う。
 ```
 
+`Refine`ボタンを押すと以下のようになりました。
+
 ![](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-initial.png)
 
-`Refine`ボタンで書き直した結果も悪くはないのですが、fetch MCPサーバーを使用せずに記憶で書いているのと、英語になってしまいました。この点をチャットで修正します。
+悪くはないのですが、fetch MCPサーバーを使用せずに記憶で書いているのと、英語になってしまいました。この点をチャットで修正します。
 
 ```
 https://www.conventionalcommits.org/en/v1.0.0/ を参照して、
@@ -220,7 +222,7 @@ https://www.conventionalcommits.org/en/v1.0.0/ を参照して、
 
 ![](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-refined.png)
 
-Zennのプロジェクトであることを想定した良い Agent Steering ができました。
+Zennの記事リポジトリであることを想定した良い Agent Steering ができました。
 
 :::message
 言語やコミットメッセージなどの Agent Steering は、全てのプロジェクトで共通利用したいかもしれません。これらのファイルをもっと汎用的な内容にして`~/.kiro/steering`に保存することで、全てのプロジェクトで適用される Global Agent Steering にすることもできます。
@@ -281,7 +283,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 
 ### 好みのエディターで本文を書く
 
-このままKiroで本文を書いてもよいでしょうが、私は日常のメモをObsidianで書いていることもあって、Obsidianで書いています。Obsidianの File > Open Vault... > Open folder as vault からGitHubリポジトリを指定しても良いですし、すでに利用している Obsidian Vault があるならば、GitHubリポジトリをそのVault内に移動しても良いでしょう。
+このままKiroで本文を書いてもよいでしょうが、私は日常のメモをObsidianで書いていることもあって、Obsidianで書いています。Obsidianの `File > Open Vault... > Open folder as vault` からGitHubリポジトリを指定しても良いですし、すでに利用している Obsidian Vault があるならば、GitHubリポジトリをそのVault内に移動しても良いでしょう。
 
 ![](/images/kiro-zenn-writing-efficiency-improvement/obsidian-vault-setup.png)
 
