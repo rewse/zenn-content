@@ -8,7 +8,8 @@ topics:
   - ai
   - writing
   - productivity
-published: false
+published: true
+publication_name: aws_japan
 ---
 
 Zennで記事を書くときに、本文はそれなりに書けるとしても、良いタイトルを考えたり、適切なトピックを選ぶことが面倒だったりしませんか？ このようなアシスタント作業はAIに任せて、人間は本文に集中しましょう。この記事では、Kiroを使ってZennの記事執筆を効率化し、品質を向上させる方法を紹介します。
