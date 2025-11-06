@@ -7,7 +7,7 @@ topics:
   - zenn
   - ai
   - writing
-  - productivity
+  - AWS
 published: true
 publication_name: aws_japan
 ---
