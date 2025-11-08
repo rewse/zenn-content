@@ -7,10 +7,8 @@ topics:
   - btrfs
   - troubleshooting
   - nas
-  - linux
 published: true
 ---
-
 ## TL;DR
 
 ハードリンクを多用するバックアップツールがBtrfsファイルシステムのメタデータ領域を圧迫していました。不要なバックアップセットを削除して領域を解放することで、メタデータ領域不足による書き込みエラーを解決しました。
