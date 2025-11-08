@@ -369,7 +369,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 
 ![タイトルとslug更新後の画面](/images/kiro-zenn-writing-efficiency-improvement/title-slug-updated.png)
 
-その他にも、以下のようなところでKiroが使えるでしょう。
+その他にも以下のようなところでKiroが使えるでしょう。
 
 - 「画像のファイル名を適切なslugに変更して」
 - 「前後の文脈や画像のファイル名から推測して、画像にaltを設定して」
