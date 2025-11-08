@@ -43,7 +43,7 @@ KiroのUIを日本語に変更したい場合は `View > Command Palette...` メ
 
 左パネルのKiroアイコンを選ぶと以下のような画面となります。それぞれのパネルについて簡単に説明します。
 
-![Kiroパネルの概要画面](/images/kiro-zenn-writing-efficiency-improvement/kiro-panels-overview.png)
+![Kiroパネルの画面](/images/kiro-zenn-writing-efficiency-improvement/kiro-panels-overview.png)
 
 #### Specs: 今回は使用しない
 
@@ -85,7 +85,7 @@ MCP Servers パネルの右上の📝アイコンを押してエディターを�
 }
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/mcp-server-fetch-config.png)
+![MCP Server Fetch 設定画面](/images/kiro-zenn-writing-efficiency-improvement/mcp-server-fetch-config.png)
 
 :::message
 何らかのエラーで`fetch`が有効にならない場合は、ウィンドウ右下のチャットボックスからKiroに「fetch MCPサーバーが動かないけど原因はなに？」と聞いてみてください
@@ -97,7 +97,7 @@ MCP Servers パネルの右上の📝アイコンを押してエディターを�
 
 Agent Steering パネルにある `Generate Steering Docs` ボタンを押すとproduct / structure / techという3つのファイルが作成されます。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/generate-steering-docs-button.png)
+![Steering Docs 生成ボタン](/images/kiro-zenn-writing-efficiency-improvement/generate-steering-docs-button.png)
 
 :::message
 右パネルのチャットの最後に `Credits used: 0.34` と表示されています。つまり、月間50クレジットの無料枠では、このくらいの作業が月間150回くらいできることになります。
@@ -109,7 +109,7 @@ Agent Steering パネルにある `Generate Steering Docs` ボタンを押すと
 Steering内のファイルを日本語に翻訳
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/translate-steering-files-chat.png)
+![Steeringファイル翻訳チャット画面](/images/kiro-zenn-writing-efficiency-improvement/translate-steering-files-chat.png)
 
 #### プロジェクトの目的を教える: product.md
 
@@ -127,7 +127,7 @@ Steering内のファイルを日本語に翻訳
 
 MCPサーバーが正しく動作すれば、チャットウィンドウ内に `Called MCP tool fetch` と表示されます。Kiroが`product`を以下のように変更し、Zennがどのようなプラットフォームなのか詳しく記述されました。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/product-md-after-refine.png)
+![product.mdリファイン後の画面](/images/kiro-zenn-writing-efficiency-improvement/product-md-after-refine.png)
 
 一方で、`プロダクト概要`が Zenn CLI のデモプロジェクトと誤解されています。これは Zenn CLI しかインストールされていないリポジトリを使っていることと、私がリポジトリ名を`demo`にしてしまったからでしょう。そのため、ここを修正させます。
 
@@ -140,7 +140,7 @@ MCPサーバーが正しく動作すれば、チャットウィンドウ内に `
 `○○だけ修正して`は、問題なかった部分が変更されることを防ぐために良い方法です。
 :::
 
-![プロダクト概要を修正後の画面](/images/kiro-zenn-writing-efficiency-improvement/product-overview-corrected.png)
+![プロダクト概要修正後の画面](/images/kiro-zenn-writing-efficiency-improvement/product-overview-corrected.png)
 
 `プロダクト概要`が正しくなりました。このように Agent Steering は、人間が最初から最後まで書かなくても、参考文献を渡すだけで良い感じに書いてもらうことができます。
 
@@ -148,13 +148,13 @@ MCPサーバーが正しく動作すれば、チャットウィンドウ内に `
 
 `structure`には、このプロジェクトのファイル構造やアーキテクチャを記載します。すでに十分な品質なので、このまま使うことにします。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/structure-md-content.png)
+![structure.mdの内容](/images/kiro-zenn-writing-efficiency-improvement/structure-md-content.png)
 
 #### 技術的な詳細を教える: tech.md
 
 `tech`には、このプロジェクトの技術的な実装詳細 / ツール / デプロイ手順などを記載します。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/tech-md-initial-content.png)
+![tech.md初期内容](/images/kiro-zenn-writing-efficiency-improvement/tech-md-initial-content.png)
 
 
 Kiroは Zenn CLI については詳しいようですが、ファイル形式については不十分なため、参考文献を渡します。
@@ -166,7 +166,7 @@ Kiroは Zenn CLI については詳しいようですが、ファイル形式に
 - https://zenn.dev/zenn/articles/zenn-cli-guide
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/tech-md-after-refine.png)
+![tech.mdリファイン後の画面](/images/kiro-zenn-writing-efficiency-improvement/tech-md-after-refine.png)
 
 `ファイル形式・構造`について詳しく書かれるようになりました。
 
@@ -176,7 +176,7 @@ Kiroは Zenn CLI については詳しいようですが、ファイル形式に
 
 Kiroに日本語で質問すると日本語で答えてくれていますが、これを明示的に Agent Steering で定義しましょう。Agent Steering パネル右上の + ボタンを押してワークスペースレベルの新規 Agent Steering を`language`という名前で作成します。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/create-language-steering.png)
+![language Steering 作成画面](/images/kiro-zenn-writing-efficiency-improvement/create-language-steering.png)
 
 作成された`language.md`にルールを簡単に記述します。
 
@@ -189,11 +189,11 @@ inclusion: always
 - Agent Steering は日本語で記述する
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/language-md-initial-rules.png)
+![language.md初期ルール](/images/kiro-zenn-writing-efficiency-improvement/language-md-initial-rules.png)
 
 書き終わったら右上の`Refine`ボタンを押します。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/language-md-after-refine.png)
+![language.mdリファイン後の画面](/images/kiro-zenn-writing-efficiency-improvement/language-md-after-refine.png)
 
 だいぶ良い感じにしてくれました。ただ、コミットメッセージは英語が良かったので、そこだけ手動で修正しました。
 
@@ -211,7 +211,7 @@ inclusion: always
 
 `Refine`ボタンを押すと以下のようになりました。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-initial.png)
+![コミットメッセージ標準初期画面](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-initial.png)
 
 悪くはないのですが、fetch MCPサーバーを使用せずに記憶で書いているのと、英語になってしまいました。この点をチャットで修正します。
 
@@ -220,7 +220,7 @@ https://www.conventionalcommits.org/en/v1.0.0/ を参照して、
 その内容で #commit-message-standards.md を日本語でリファイン
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-refined.png)
+![コミットメッセージ標準リファイン後の画面](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-refined.png)
 
 Zennの記事リポジトリであることを想定した良い Agent Steering ができました。
 
@@ -251,7 +251,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 その内容で #zenn-markdown-standards を日本語でリファイン
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/zenn-markdown-standards-refined.png)
+![Zenn Markdown標準リファイン後の画面](/images/kiro-zenn-writing-efficiency-improvement/zenn-markdown-standards-refined.png)
 
 :::message
 私が実際に使用している Agent Steering は以下から参照することができます。
@@ -270,14 +270,14 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 お薦めのタイトルは？
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/article-title-suggestions.png)
+![記事タイトル提案画面](/images/kiro-zenn-writing-efficiency-improvement/article-title-suggestions.png)
 
 ```
 「Kiroを使ってZennの記事の執筆効率と品質を改善する方法」にしよう。
 適切なslugでファイルを作成して
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/article-file-created.png)
+![記事ファイル作成完了画面](/images/kiro-zenn-writing-efficiency-improvement/article-file-created.png)
 
 適切なslugでファイルが作成され、Front Matter も良い感じです。本文まで書いてくれましたが、私はこれを参考にせず、全部消しています。
 
@@ -285,7 +285,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 
 このままKiroで本文を書いてもよいでしょうが、私は日常のメモをObsidianで書いていることもあって、Obsidianで書いています。Obsidianの `File > Open Vault... > Open folder as vault` からGitHubリポジトリを指定しても良いですし、すでに利用している Obsidian Vault があるならば、GitHubリポジトリをそのVault内に移動しても良いでしょう。
 
-![](/images/kiro-zenn-writing-efficiency-improvement/obsidian-vault-setup.png)
+![Obsidian Vault 設定画面](/images/kiro-zenn-writing-efficiency-improvement/obsidian-vault-setup.png)
 
 ## Kiroに記事をブラッシュアップしてもらう
 
@@ -297,7 +297,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 誤字脱字を修正して
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/typo-correction-chat.png)
+![誤字脱字修正チャット画面](/images/kiro-zenn-writing-efficiency-improvement/typo-correction-chat.png)
 
 私はスペースを含む英語と日本語の間には半角スペースを入れているのですが、それが修正されてしまいました。今後のために、これは Agent Steering に含めたほうが良さそうです。
 
@@ -308,7 +308,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 - 文末の！と？の後には半角スペースを入れる
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/markdown-standards-updated.png)
+![Markdown標準更新画面](/images/kiro-zenn-writing-efficiency-improvement/markdown-standards-updated.png)
 
 このように、「そうじゃないんだよなー」というアシストが行われたときは、都度 Agent Steering に追記していき、Agent Steering を育てていくことが重要です。
 
@@ -329,7 +329,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 あなたが読んで分かりづらかった点を指摘して
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/readability-feedback.png)
+![読みやすさフィードバック画面](/images/kiro-zenn-writing-efficiency-improvement/readability-feedback.png)
 
 どのように修正すべきかも聞いてみましょう。
 
@@ -337,7 +337,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 1についてどうしたほうがよい？
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/improvement-suggestion.png)
+![改善提案画面](/images/kiro-zenn-writing-efficiency-improvement/improvement-suggestion.png)
 
 見出しや「まとめ」は本文の概要なので、AIが得意とする領域です。
 
@@ -345,28 +345,29 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 目次となるように適切に見出しを入れて
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/headings-added.png)
+![見出し追加後の画面](/images/kiro-zenn-writing-efficiency-improvement/headings-added.png)
 
 ```
 最後に「まとめ」を追加して
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/summary-section-added.png)
+![まとめセクション追加後の画面](/images/kiro-zenn-writing-efficiency-improvement/summary-section-added.png)
 
-いざ書いてみると当初の予定からは少しずれているときもあるので、タイトルとトピックを書き終わった後に再検討しても良いでしょう。
+いざ書きおえてみるとタイトルとトピックが当初の予定からは少しずれているときもあるので、書き終わった後にそれらを再検討しても良いでしょう。
 
 ```
 本文を読んでみて、より適切なタイトルとトピックがあれば提案して。
 今のままで良ければ今のままにしておく
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/title-topic-suggestions.png)
+![タイトルとトピック提案画面](/images/kiro-zenn-writing-efficiency-improvement/title-topic-suggestions.png)
 
 ```
 タイトルを「Kiro AI でZenn記事執筆を自動化する」に変更して、
 それに合わせてファイル名のslugも変更
 ```
 
+![タイトルとslug更新後の画面](/images/kiro-zenn-writing-efficiency-improvement/title-slug-updated.png)
 
 その他にも、以下のようなところでKiroが使えるでしょう。
 
@@ -382,7 +383,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 新しい記事をコミット
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/git-commit-with-message.png)
+![Gitコミットメッセージ画面](/images/kiro-zenn-writing-efficiency-improvement/git-commit-with-message.png)
 
 `commit-message-standards` Agent Steering で定義した規約に従ってコミットメッセージが作成されました。
 
