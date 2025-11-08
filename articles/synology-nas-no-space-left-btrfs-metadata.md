@@ -109,6 +109,10 @@ nice -n 10 \
   $src $dest /etc/tmbackup.exclude > /dev/null
 ```
 
+:::message
+`nice -n 10` は、バックアップ処理の優先度を下げて実行するコマンドです。数値が大きいほど優先度が低くなり（-20〜19の範囲）、他のプロセスへの影響を最小限に抑えながらバックグラウンドでバックアップを実行できます。
+:::
+
 ## まとめ
 
 Synology NAS で `No space left on device` エラーが発生した際は、単純な容量不足だけでなくメタデータ領域の不足も疑う必要があります。特にハードリンクを多用するバックアップツール（rsync-time-backup / duplicity / borgbackup / rdiff-backupなど）を使用している場合、大量のinodeを消費してメタデータ領域を圧迫する可能性があります。
