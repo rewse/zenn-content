@@ -367,7 +367,12 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 それに合わせてファイル名のslugも変更
 ```
 
-![](/images/kiro-zenn-writing-efficiency-improvement/title-slug-updated.png)
+
+その他にも、以下のようなところでKiroが使えるでしょう。
+
+- 「画像のファイル名を適切なslugに変更して」
+- 「前後の文脈や画像のファイル名から推測して、画像にaltを設定して」
+- 「Zennプレビューを開始」
 
 ### 完成した記事をコミットする
 
