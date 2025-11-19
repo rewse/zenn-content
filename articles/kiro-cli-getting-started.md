@@ -127,7 +127,7 @@ Model: Auto (/model to change) | Plan: KIRO FREE (/usage for more detail)
 
 ### MCPサーバーの自動読み込み
 
-Kiro IDE でMCPサーバーを設定している場合、それらが自動的に読み込まれます。例えば私の環境では`fetch`と`brave-search`が読み込まれました。これらは `~/.kiro/settings/mcp.json` で定義されています。Kiro IDE を使ったことがない場合はMCPサーバーがなにも設定されていないため、この表示は出ません。必要に応じて後から追加できます。
+Kiro IDE で`~/.kiro/settings/mcp.json`にMCPサーバーの設定を行っている場合、それらが自動的に読み込まれます。例えば私の環境では`fetch`と`brave-search`が読み込まれました。Kiro IDE を使ったことがない場合はMCPサーバーがなにも設定されていないため、この表示は出ません。必要に応じて後から追加できます。
 
 :::message
 MCPは、AIが外部ツールやサービスと連携するための仕組みです。例えばWeb検索 / ファイル取得 / API呼び出しなどの機能をAIに追加できます。MCPサーバーを設定することで、Kiroの機能を拡張できます。
