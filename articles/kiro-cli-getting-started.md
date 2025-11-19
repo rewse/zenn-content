@@ -17,7 +17,7 @@ publication_name: aws_japan
 Kiro IDE の一般提供開始に合わせて Kiro CLI が発表されました。Kiro CLI は、ターミナルからAIコーディングができるコマンドラインツールです。Kiro IDE が特定のプロジェクト（GitHubリポジトリ）を開いて開発するのに対し、Kiro CLI はプロジェクトに縛られずどこでも使えます。OSのトラブルシューティングや、SSH接続先での作業、ちょっとしたAIとの対話など、気軽に使えるのが特徴です。
 
 :::message
-Kiro CLI は、Amazon Q Developer CLI がアップグレードして Kiro IDE と統合したものです。
+従来はAIコーディングコマンドラインツールとして Amazon Q Developer CLI が提供されていましたが、これがアップグレードして Kiro IDE と統合したものが Kiro CLI です。
 :::
 
 この記事は、はじめて Kiro CLI を個人ユーザーとして使う方のために、インストールから基本操作までを紹介した入門編となっています。
@@ -38,6 +38,17 @@ Downloading package...
 
 Next steps:
 Use the command "kiro-cli" to get started!
+```
+
+Homebrewでインストールすることもできます。
+
+```sh
+[~]% brew install kiro-cli
+==> Downloading https://desktop-release.q.us-east-1.amazonaws.com/1.20.0/Kiro%20CLI.dmg
+########################################################################################################################################################## 100.0%
+==> Installing Cask kiro-cli
+==> Moving App 'Kiro CLI.app' to '/Applications/Kiro CLI.app'
+🍺  kiro-cli was successfully installed!
 ```
 
 Windowsにインストールしたい場合は、以下のブログを参考にしてください。
@@ -383,7 +394,7 @@ Select MCP servers (use Space to toggle, Enter to confirm):
 
 このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、AWS Documentation MCPサーバーの定義を追加します。これによって、このMCPサーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
 
-`"useLegacyMcpJson": false` だと`~/.kiro/settings/mcp.json`が読み込まれません。つまり、AWS Documentation MCPサーバーしか使わないエージェントになります。`"useLegacyMcpJson": true` にすれば`~/.kiro/settings/mcp.json`も読み込むようになります。
+`"useLegacyMcpJson": false` だと`~/.kiro/settings/mcp.json`とプロジェクトのルートディレクトリにある`.kiro/settings/mcp.json`が読み込まれません。つまり、AWS Documentation MCPサーバーしか使わないエージェントになります。`"useLegacyMcpJson": true` にすれば両方の`mcp.json`も読み込むようになります。
 
 ```js:~/.kiro/agents/aws-doc.json
 {
@@ -433,7 +444,7 @@ Select MCP servers (use Space to toggle, Enter to confirm):
 Amazon S3 のマニュアルについて聞いてみましょう。
 
 ```
-[aws-doc] > S3バケットの命名ルールを参照
+[aws-doc] > S3バケットの命名ルールを教えて
 
 > S3バケットの命名ルールについて、AWS公式ドキュメントを検索します。
 Running tool search_documentation with the param (from mcp server: awslabs.aws-documentation-mcp-server)
