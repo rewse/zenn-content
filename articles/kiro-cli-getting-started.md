@@ -392,9 +392,9 @@ Select MCP servers (use Space to toggle, Enter to confirm):
 }
 ```
 
-このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、AWS Documentation MCPサーバーの定義を追加します。これによって、このMCPサーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
+このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、例として AWS Documentation MCPサーバーの定義を追加します。これによって、このMCPサーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
 
-`"useLegacyMcpJson": false` だと`~/.kiro/settings/mcp.json`とプロジェクトのルートディレクトリにある`.kiro/settings/mcp.json`が読み込まれません。つまり、AWS Documentation MCPサーバーしか使わないエージェントになります。`"useLegacyMcpJson": true` にすれば両方の`mcp.json`も読み込むようになります。
+`"useLegacyMcpJson": false` だと`~/.kiro/settings/mcp.json`とプロジェクトのルートディレクトリにある`.kiro/settings/mcp.json`が読み込まれません。つまり、AWS Documentation MCPサーバーしか使わないエージェントになります。`"useLegacyMcpJson": true` にすれば両方の`mcp.json`も合わせて読み込むようになります。
 
 ```js:~/.kiro/agents/aws-doc.json
 {
