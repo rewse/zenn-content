@@ -256,7 +256,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 :::message
 私が実際に使用している Agent Steering は以下から参照することができます。
 - [zenn\-content/\.kiro/steering at main · rewse/zenn\-content](https://github.com/rewse/zenn-content/tree/main/.kiro/steering)
-- [rewse/kiro\-global\-steering: Global Steering for Kiro](https://github.com/rewse/kiro-global-steering)
+- [dotfiles/dot\_kiro/steering at main · rewse/dotfiles](https://github.com/rewse/dotfiles/tree/main/dot_kiro/steering)
 :::
 
 ## 実際に記事を書いてみよう
