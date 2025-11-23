@@ -1,75 +1,75 @@
 # Zenn Content Repository
 
-GitHub-integrated repository for publishing technical articles and books on the Zenn platform. This repository provides a seamless workflow from local writing to automatic publication.
+Zennプラットフォームで技術記事や本を公開するための GitHub 連携リポジトリです。ローカルでの執筆から自動公開まで、シームレスなワークフローを提供します。
 
-## Overview
+## 概要
 
-This repository is integrated with the Zenn platform to manage and publish technical articles and books. Write content in Markdown format locally, and it will be automatically published to Zenn when pushed to GitHub.
+このリポジトリは Zenn プラットフォームと連携し、技術記事や本を管理・公開します。ローカル環境で Markdown 形式でコンテンツを執筆し、GitHub にプッシュすると自動的に Zenn へ公開されます。
 
-### Key Features
+### 主な機能
 
-- **GitHub Integration**: Automatic publication on push
-- **Local Writing**: Write with your favorite editor
-- **Preview**: Local preview with Zenn CLI
-- **Image Management**: Centralized image storage in repository
-- **Version Control**: Track changes with Git
+- **GitHub 連携**: プッシュ時の自動公開
+- **ローカル執筆**: お気に入りのエディタで執筆可能
+- **プレビュー**: Zenn CLI によるローカルプレビュー
+- **画像管理**: リポジトリ内での一元的な画像管理
+- **バージョン管理**: Git による変更履歴の追跡
 
-## Tech Stack
+## 技術スタック
 
-- **zenn-cli**: Official CLI tool for Zenn platform
-- **Node.js**: CommonJS modules
-- **npm**: Package manager
+- **zenn-cli**: Zenn プラットフォーム公式 CLI ツール
+- **Node.js**: CommonJS モジュール
+- **npm**: パッケージマネージャー
 
-## Setup
+## セットアップ
 
-### Prerequisites
+### 前提条件
 
-- Node.js installed
-- GitHub account linked with Zenn account
+- Node.js がインストールされていること
+- GitHub アカウントが Zenn アカウントと連携されていること
 
-### Installation
+### インストール
 
 ```bash
-# Install dependencies
+# 依存関係をインストール
 npm install
 ```
 
-## Usage
+## 使い方
 
-### Create a New Article
+### 新しい記事を作成
 
 ```bash
-# Create an article
+# 記事を作成
 npx zenn new:article
 
-# Create with options
-npx zenn new:article --slug article-slug --title "Title" --type tech --emoji ✨
+# オプション付きで作成
+npx zenn new:article --slug article-slug --title "タイトル" --type tech --emoji ✨
 ```
 
-### Create a New Book
+### 新しい本を作成
 
 ```bash
-# Create a book
+# 本を作成
 npx zenn new:book
 
-# Create with slug
+# スラッグ指定で作成
 npx zenn new:book --slug book-slug
 ```
 
-### Local Preview
+### ローカルプレビュー
 
 ```bash
-# Start preview server
+# プレビューサーバーを起動
 npx zenn preview
 ```
 
-Access http://localhost:8000 in your browser to preview content.
+ブラウザで http://localhost:8000 にアクセスしてコンテンツをプレビューできます。
 
-### Publish Articles
+### 記事を公開
 
-1. Set `published: true` in the article's front matter
-2. Commit and push to GitHub repository
-3. Content will be automatically published to Zenn
+1. 記事の Front Matter で `published: true` を設定
+2. GitHub リポジトリにコミット＆プッシュ
+3. コンテンツが自動的に Zenn へ公開されます
 
 ```bash
 git add .
@@ -77,40 +77,39 @@ git commit -m "feat(article): add new article about docker"
 git push origin main
 ```
 
-## Project Structure
+## プロジェクト構造
 
 ```
 .
-├── articles/           # Technical articles (Markdown)
-├── books/             # Book content
-├── images/            # Images for articles and books
-│   └── article-slug/  # Organized by article
-├── .kiro/             # Kiro AI settings
-├── package.json       # Project configuration
-└── README.md          # This file
+├── .kiro/             # Kiro AI 設定
+├── articles/          # 技術記事
+├── books/             # 本のコンテンツ
+├── images/            # 記事・本で使用する画像
+│   └── article-slug/  # 記事ごとに整理
+└── package.json       # プロジェクト設定
 ```
 
-## Article Front Matter
+## 記事の Front Matter
 
 ```yaml
 ---
-title: "Article Title"
-emoji: "😸"              # Icon emoji (1 character)
-type: "tech"             # "tech" or "idea"
-topics: ["docker", "aws", "devops"]  # Tags (max 5)
-published: true          # Publication status
-published_at: 2050-06-12 09:03  # Optional: scheduled publication
+title: "記事のタイトル"
+emoji: "😸"              # アイコン絵文字（1文字）
+type: "tech"             # "tech" または "idea"
+topics: ["docker", "aws", "devops"]  # タグ（最大5個）
+published: true          # 公開状態
+published_at: 2050-06-12 09:03  # オプション: 公開予約日時
 ---
 ```
 
-### Article Types
+### 記事タイプ
 
-- **tech**: Technical content about programming, infrastructure, hardware, etc.
-- **idea**: Career, management, abstract concepts, or information summaries
+- **tech**: プログラミング、インフラ、ハードウェアなどの技術に関する具体的な内容
+- **idea**: キャリア、マネジメント、抽象的な考え方、情報のまとめ記事
 
-## Image Management
+## 画像管理
 
-### Image Placement
+### 画像の配置
 
 ```
 images/
@@ -119,38 +118,38 @@ images/
     └── diagram.jpg
 ```
 
-### Image Reference
+### 画像の参照
 
 ```markdown
-![Alt text](/images/article-slug/screenshot-1.png)
+![代替テキスト](/images/article-slug/screenshot-1.png)
 ```
 
-### Limitations
+### 制限事項
 
-- File size: Max 3MB
-- Supported formats: `.png` `.jpg` `.jpeg` `.gif` `.webp`
+- ファイルサイズ: 最大3MB
+- 対応フォーマット: `.png` `.jpg` `.jpeg` `.gif` `.webp`
 
-## Content Guidelines
+## コンテンツガイドライン
 
-### Recommended Article Characteristics
+### 推奨される記事の特徴
 
-- Title matches content
-- Clear overview at the beginning
-- Detailed environment and reproduction conditions
-- Clear target audience
-- Personal experience and insights
+- タイトルと内容が一致している
+- 冒頭に明確な概要がある
+- 環境や再現条件が詳細に記述されている
+- 対象読者が明確
+- 個人の経験や考察が含まれている
 
-### Content to Avoid
+### 避けるべき内容
 
-- Posts primarily for advertising or promotion
-- Exaggerated clickbait titles
-- Copyright-infringing content
-- Unverified AI-generated content
+- 広告や宣伝が主目的の投稿
+- 誇張的なクリックベイトタイトル
+- 著作権を侵害するコンテンツ
+- 検証されていない AI 生成コンテンツ
 
-## References
+## 参考リンク
 
-- [About Zenn](https://zenn.dev/about)
-- [Community Guidelines](https://zenn.dev/guideline)
-- [GitHub Integration Guide](https://zenn.dev/zenn/articles/connect-to-github)
-- [Markdown Guide](https://zenn.dev/zenn/articles/markdown-guide)
+- [Zennについて](https://zenn.dev/about)
+- [コミュニティガイドライン](https://zenn.dev/guideline)
+- [GitHub連携ガイド](https://zenn.dev/zenn/articles/connect-to-github)
+- [Markdownガイド](https://zenn.dev/zenn/articles/markdown-guide)
 - [Zenn CLI](https://zenn.dev/zenn/articles/install-zenn-cli)
