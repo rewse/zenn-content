@@ -1,16 +1,26 @@
 {
-  "name": "zenn",
+  "name": "zenn-content",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "GitHub-integrated repository for publishing technical articles and books on the Zenn platform",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preview": "zenn preview",
+    "new:article": "zenn new:article",
+    "new:book": "zenn new:book",
+    "lint": "textlint articles/**/*.md"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "zenn",
+    "technical-writing",
+    "articles",
+    "books"
+  ],
+  "author": "Tats Shibata <https://github.com/rewse>",
+  "license": "CC-BY-SA-4.0",
   "type": "commonjs",
   "dependencies": {
     "zenn-cli": "^0.2.10"
+  },
+  "devDependencies": {
+    "textlint-config-rewse": "^1.2.3"
   }
 }

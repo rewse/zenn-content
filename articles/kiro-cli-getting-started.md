@@ -127,7 +127,7 @@ Model: Auto (/model to change) | Plan: KIRO FREE (/usage for more detail)
 
 ### MCPサーバーの自動読み込み
 
-Kiro IDE で`~/.kiro/settings/mcp.json`にMCPサーバーの設定を行っている場合、それらが自動的に読み込まれます。例えば私の環境では`fetch`と`brave-search`が読み込まれました。Kiro IDE を使ったことがない場合はMCPサーバーがなにも設定されていないため、この表示は出ません。必要に応じて後から追加できます。
+Kiro IDE で`~/.kiro/settings/mcp.json`にMCPサーバーの設定をしている場合、それらが自動的に読み込まれます。例えば私の環境では`fetch`と`brave-search`が読み込まれました。Kiro IDE を使ったことがない場合はMCPサーバーがなにも設定されていないため、この表示は出ません。必要に応じて後から追加できます。
 
 :::message
 MCPは、AIが外部ツールやサービスと連携するための仕組みです。例えばWeb検索 / ファイル取得 / API呼び出しなどの機能をAIに追加できます。MCPサーバーを設定することで、Kiroの機能を拡張できます。
@@ -357,7 +357,7 @@ MCPサーバーを使う際、Kiro IDE と共通の`~/.kiro/settings/mcp.json`�
 
 一つのやり方はプロジェクト単位で定義することです。プロジェクト（GitHubリポジトリ）のルートディレクトリに`.kiro/settings/mcp.json`を作成すれば、そのディレクトリでKiroを動かしたときだけ読まれます。しかし、Kiro CLI だと特定のディレクトリに移動せず、どこでも使いたいときもあるでしょう。
 
-このような場合は、Custom Agent を作成することで Kiro CLI 専用の設定を持つことができます。作成には `/agent create` ではなく `/agent generate` を使うとプロンプトを自動生成してくれます。
+このような場合は、Custom Agent を作成することで Kiro CLI 専用の設定を持つことができます。作成時は `/agent create` ではなく `/agent generate` を使うとプロンプトを自動生成してくれます。
 
 ```
 > /agent generate
@@ -392,7 +392,7 @@ Select MCP servers (use Space to toggle, Enter to confirm):
 }
 ```
 
-このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、例として AWS Documentation MCPサーバーの定義を追加します。これによって、このMCPサーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
+このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、例として AWS Documentation MCP サーバーの定義を追加します。これによって、この MCP サーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
 
 `"useLegacyMcpJson": false` だと`~/.kiro/settings/mcp.json`とプロジェクトのルートディレクトリにある`.kiro/settings/mcp.json`が読み込まれません。つまり、AWS Documentation MCPサーバーしか使わないエージェントになります。`"useLegacyMcpJson": true` にすれば両方の`mcp.json`も合わせて読み込むようになります。
 
@@ -498,7 +498,7 @@ Kiro CLI にはAIによる自動補完機能もあります。コマンドやフ
 
 この記事では、Kiro CLI のインストール方法 / ログイン手順 / MCPサーバーとSteeringの自動読み込み、そして実際のトラブルシューティング例を紹介しました。
 
-Kiro CLI はプロジェクトに縛られずに使えるため、日常的なトラブルシューティングや調べ物に便利です。MCPサーバーで機能を拡張したり、Custom Agent を作成して用途に応じた設定を持つこともできます。月間50クレジットの無料枠があるので、気軽に試してみてください。
+Kiro CLI はプロジェクトに縛られず使えるため、日常的なトラブルシューティングや調べ物に便利です。MCP サーバーで機能を拡張したり、Custom Agent を作成したりして用途に応じた設定を持つこともできます。月間50クレジットの無料枠があるので、気軽に試してみてください。
 
 さらに詳しい機能や設定方法については、[Kiro CLI 公式ドキュメント](https://kiro.dev/docs/cli/)を参照してください。
 
