@@ -1,3 +1,6 @@
 .DS_Store
 logs
 node_modules
+
+# Obsidian workspace (user-specific)
+.obsidian/workspace.json
