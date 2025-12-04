@@ -18,9 +18,9 @@
   "license": "CC-BY-SA-4.0",
   "type": "commonjs",
   "dependencies": {
-    "zenn-cli": "^0.2.10"
+    "zenn-cli": ">=0.2.10"
   },
   "devDependencies": {
-    "textlint-config-rewse": "^1.2.3"
+    "textlint-config-rewse": ">=1.2.3"
   }
 }
