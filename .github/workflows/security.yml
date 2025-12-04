@@ -1,0 +1,42 @@
+name: Security
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  actions: read
+  security-events: write
+  contents: read
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install latest npm
+        run: npm install -g npm@latest
+
+      - name: Setup Aikido Safe Chain
+        run: curl -fsSL https://raw.githubusercontent.com/AikidoSec/safe-chain/main/install-scripts/install-safe-chain.sh | sh -s -- --ci
+
+      - name: Install dependencies
+        env:
+          SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS: 96
+        run: npm ci
+
+  osv-scan:
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.3.0
+    with:
+      scan-args: |-
+        --recursive
+        ./
