@@ -298,7 +298,7 @@ Agent: Uses ha_get_automation_traces to check execution history
 }
 ```
 
-![fetch MCP Server が有効になった状態](https://res.cloudinary.com/zenn/image/fetch/s--f7iZK2gA--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_1200/https://storage.googleapis.com/zenn-user-upload/deployed-images/9046a625e790523690cecc89.png%3Fsha%3D339b94dc510495a5c7085dd5baa9329408e8719b)
+![fetch MCP Server が有効になった状態](/images/kiro-zenn-writing-efficiency-improvement/mcp-server-fetch-config.png)
 
 :::message
 何らかのエラーでfetchが有効にならない場合は、ウィンドウ右下のチャットボックスからKiroに「fetch MCPサーバーが動かないけど原因はなに？」と聞いてみてください
