@@ -8,7 +8,7 @@ topics:
   - mcp
   - skills
   - homeassistant
-published: false
+published: true
 publication_name: aws_japan
 ---
 
