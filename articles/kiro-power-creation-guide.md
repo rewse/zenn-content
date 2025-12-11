@@ -12,9 +12,9 @@ published: false
 publication_name: aws_japan
 ---
 
-私は自宅のスマートホーム化が趣味で、その中心として [Home Assistant](https://www.home-assistant.io/) というソフトを使っています。GitHub の年次レポートである [Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/) によると、Home Assistant は「今年急成長したリポジトリ」の第10位に入るほど人気のあるソフトです。
+私は自宅のスマートホーム化が趣味で、その中心として [Home Assistant](https://www.home-assistant.io/) というソフトを使っています。GitHubの年次レポートである [Octoverse 2025](https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/) によると、Home Assistant は「今年急成長したリポジトリ」の第10位に入るほど人気のあるソフトです。
 
-そんな Home Assistant のための強力な非公式 MCP Server、[ha-mcp](https://github.com/homeassistant-ai/ha-mcp) がリリースされました。[公式 MCP Server](https://www.home-assistant.io/integrations/mcp_server/) もあったのですが、これは音声アシストで動くエンティティしか制御できないという制限がある一方、ha-mcpは Home Assistant のAPIすべてを網羅する勢いで開発されています。
+そんな Home Assistant のための強力な非公式 MCP Server、[ha-mcp](https://github.com/homeassistant-ai/ha-mcp)がリリースされました。[公式 MCP Server](https://www.home-assistant.io/integrations/mcp_server/) もあったのですが、これは音声アシストで動くエンティティしか制御できないという制限がある一方、ha-mcpは Home Assistant のAPIすべてを網羅する勢いで開発されています。
 
 一方で、ツールが80以上あるという機能の豊富さから、ha-mcpを有効にすると、私の環境ではコンテキスト消費量が14%から33%に爆増してしまいました。ちょうどそんなとき、この問題を解決できそうな機能、Kiro Power がリリースされたので、ちょうど良いとばかりにha-mcpを使って [Home Assistant Power for Kiro](https://github.com/rewse/kiro-power-homeassistant) を作ってみました。
 
@@ -23,14 +23,14 @@ publication_name: aws_japan
 ![Home Assisstant Power for Kiro](https://raw.githubusercontent.com/rewse/kiro-power-homeassistant/refs/heads/main/cover.jpg)
 
 :::message
-この記事はKiroやその他のAIコーディングツールを使ったことがある方、事前知識がある方を対象としています。基本的な使い方については [Kiro公式ドキュメント](https://kiro.dev/docs/) を参照してください。
+この記事はKiroやその他のAIコーディングツールを使ったことがある方、事前知識がある方を対象としています。基本的な使い方については[Kiro公式ドキュメント](https://kiro.dev/docs/)を参照してください。
 :::
 
 ## Kiro Power とは
 
 このコンテキスト消費の問題を解決するのが Kiro Power です。通常の MCP Server 設定では、使うかどうかに関わらず、Kiro起動時にすべてのツール定義がコンテキストに読み込まれます。ha-mcpのように80以上のツールを持つ MCP Server だと、それだけで19% (= 33 - 14) ものコンテキストを常時消費してしまいます。
 
-Kiro Power は、この問題を「動的読み込み」で解決します。具体的には、`Home Assistant` のような特定キーワードがプロンプトに含まれたとき、初めて関連する MCP Server のツールと専門知識（ステアリング）が読み込まれます。つまり、Home Assistant と関係ない作業をしているときはコンテキストを消費せず、必要になったタイミングでKiroが Home Assistant の専門エージェントに変身するという仕組みです。
+Kiro Power は、この問題を動的読み込みで解決します。具体的には、`Home Assistant` のような特定キーワードがプロンプトに含まれたとき、初めて関連する MCP Server のツールと専門知識（ステアリング）が読み込まれます。つまり、Home Assistant と関係ない作業をしているときはコンテキストを消費せず、必要になったタイミングでKiroが Home Assistant の専門エージェントに変身するという仕組みです。
 
 :::message
 ステアリングは、Kiroの振る舞いをカスタマイズするためのルールや指示を記述したファイルです。コーディング規約 / コミットメッセージの形式 / プロジェクト固有のルールなどを定義することで、Kiroがそれらに従った提案をしてくれるようになります。
@@ -38,18 +38,18 @@ Kiro Power は、この問題を「動的読み込み」で解決します。具
 
 さらに、MCP Server の設定とステアリングを一つのパッケージとして配布できるため、誰かが作った Kiro Power を簡単にインポートしてプラグインできます。
 
-他のAIコーディングアシスタントを使っている方向けに補足すると、Claude Code や OpenAI Codex にはSkillsというAIに専門知識をプラグインする仕組みがあります。Kiro Power はそれに MCP Server を組み合わせたもの、つまり Power = Skills + MCP として考えれば分かりやすいでしょう。もっと詳しく知りたい方は、公式ブログの [Introducing Kiro powers](https://kiro.dev/blog/introducing-powers/)（[日本語訳](https://aws.amazon.com/jp/blogs/news/introducing-powers/)）が参考になります。
+他のAIコーディングツールを使っている方向けに補足すると、Claude Code や OpenAI Codex にはSkillsというAIに専門知識をプラグインする仕組みがあります。Kiro Power はそれに MCP Server を組み合わせたもの、つまり Power = Skills + MCP として考えれば分かりやすいでしょう。もっと詳しく知りたい方は、公式ブログの [Introducing Kiro powers](https://kiro.dev/blog/introducing-powers/)（[日本語訳](https://aws.amazon.com/jp/blogs/news/introducing-powers/)）が参考になります。
 
 ## Kiro Power の構成要素
 
-最小構成のPowerは `POWER.md` だけです。ツールなしで知識だけを動的ロードするPowerで、Claude Code などのSkillsに相当します。
+最小構成のPowerは`POWER.md`だけです。ツールなしで知識だけを動的ロードするPowerで、Claude Code などのSkillsに相当します。
 
 ```
 power-tiny/
   └── POWER.md
 ```
 
-MCP Server も含めたい場合は `mcp.json` を追加します。これが典型的なPowerの構成です。`mcp.json`には動的に読み込みたい MCP Server の設定を記述します。`POWER.md`にはステアリングとなる知識を書きます。
+MCP Server も含めたい場合は`mcp.json`を追加します。これが典型的なPowerの構成です。`mcp.json`には動的に読み込みたい MCP Server の設定を記述します。`POWER.md`にはステアリングとなる知識を書きます。
 
 ```
 power-small/
@@ -57,7 +57,7 @@ power-small/
   └── mcp.json
 ```
 
-ただし、この構成だと`POWER.md`の内容すべてが一回の動的ロードで読まれます。`POWER.md`がけっこう大きいのに、一部の内容は限られた状況にしか関係ないという場合、コンテキスト消費が無駄になります。そのような場合は以下のように`steering`ディレクトリ内の別ファイルとすることで、その状況になったとき改めてそのファイルだけ動的ロードできるようになります。ファイル名は `.md` で終われば、あとは自由です。
+ただし、この構成だと`POWER.md`の内容すべてが一回の動的ロードで読まれます。`POWER.md`がけっこう大きいのに、一部の内容は限られた状況にしか関係ないという場合、コンテキスト消費が無駄になります。そのような場合は以下のように`steering`ディレクトリ内の別ファイルとすることで、その状況になったとき改めてそのファイルだけ動的ロードできるようになります。ファイル名は`.md`で終われば、あとは自由です。
 
 ```
 power-medium/
@@ -79,12 +79,12 @@ power-large/
         └── legendary-guide.md
 ```
 
-なお、Powerのディレクトリには隠しファイルや実行ファイルなどを含むことができません。例えば、`.git`が含まれているとインポートでエラーになります。
+なお、Powerのディレクトリには隠しファイルや実行ファイルなどを含むことができません。例えば、`.git`ディレクトリが含まれているとインポートでエラーになります。
 
 ![Unable to install power: Power validation failed: Power contains disallowed files: - .git - .github - .gitignore - .kiro - scripts/bump_version.sh Powers should only contain: POWER.md, mcp.json, and steering/*.md files. Binary executables, scripts, hidden files, credentials, and archives are not permitted in power packages.](/images/kiro-power-creation-guide/power-validation-failed-error.png)
 *`.git`などが含まれているときに発生する Power validation failed エラー*
 
-そのため、GitHubで公開する場合は、以下のようにPower本体をサブディレクトリに配置する構成をお薦めします。[公式マニュアル](https://kiro.dev/docs/powers/create/#sharing-your-power) ではリポジトリのルートに`POWER.md`などを置く例が紹介されていますが、その構成だと`.git`などが含まれてしまうためです。
+そのため、GitHubで公開する場合は、以下のようにPower本体をサブディレクトリに配置する構成をお薦めします。[公式マニュアル](https://kiro.dev/docs/powers/create/#sharing-your-power)ではリポジトリのルートに`POWER.md`などを置く例が紹介されていますが、その構成だと`.git`などが含まれてしまうためです。
 
 ```
 kiro-power-medium-tool/          # GitHubリポジトリ
@@ -136,13 +136,13 @@ Home Assistant Power では以下のように、ha-mcpだけでなく、URL先�
 }
 ```
 
-`env` 内の `${HOMEASSISTANT_URL}` のような `${...}` 形式は、シェルの環境変数を参照します。KiroがこのPowerをインポートしてアクティベートするときに、最適な方法で実装してくれます。
+`"env"`内の`${HOMEASSISTANT_URL}`のような`${...}`形式は、シェルの環境変数を参照します。KiroがこのPowerをインポートしてアクティベートするときに、最適な方法で実装してくれます。
 
 ## POWER.mdの構造
 
 ### Front Matter とキーワード選定
 
-`POWER.md`の先頭は以下のような Front Matter です。重要なのは `keywords` で、これらのキーワードのどれかがプロンプトに含まれていたときにPowerが読み込まれます。
+`POWER.md`の先頭は以下のような Front Matter です。重要なのは`keywords`で、これらのキーワードのどれかがプロンプトに含まれていたときにPowerが読み込まれます。
 
 
 ```markdown:POWER.md
@@ -159,7 +159,7 @@ author: "Shibata, Tats"
 
 - 固有名詞を優先する: Powerはユーザーレベルでインポートされるため、一般的な用語は避けましょう。例えば`HA`を含めてしまうと、Home Assistant とまったく関係ないプロジェクトで High Availability（高可用性）のつもりで「HA環境も追加して」と言ったときに Home Assistant Power が読み込まれてしまいます
 - 表記揺れを網羅する: `homeassistant`（スペースなし）と `home assistant`（スペースあり）のように、ユーザーが使いそうな表記を複数登録しておきます
-- 関連ツール名を含める: `ha-mcp` のように、このPowerで使う MCP Server の名前を含めておくと、ユーザーがそのツール名でも呼び出せます
+- 関連ツール名を含める: `ha-mcp`のように、このPowerで使う MCP Server の名前を含めておくと、ユーザーがそのツール名でも呼び出せます
 - 特徴的な機能名を含める: `lovelace`（Home Assistant のダッシュボード機能）のように、そのドメイン特有の用語を含めておくと、詳しいユーザーがピンポイントで呼び出せます
 
 ### 本文の構成
@@ -184,9 +184,9 @@ Front Matter 以外は自由に記述できますが、[公式 Kiro Power Reposi
 **License:** MIT
 ```
 
-`Overview` には、このPowerで何ができるかを記述しています。
+`Overview`には、このPowerで何ができるかを記述しています。
 
-`Onboarding` にインストール方法を記述しておくと、PowerをインポートしたタイミングでKiroがこのステップで処理を進めてくれます。たとえば「uvがあるかどうか確認」「なければuvをインストール」「環境変数の設定」「動作確認方法」などを書いておくと良いでしょう。
+`Onboarding`にインストール方法を記述しておくと、PowerをインポートしたタイミングでKiroがこのステップで処理を進めてくれます。たとえば「uvがあるかどうか確認」「なければuvをインストール」「環境変数の設定」「動作確認方法」などを書いておくと良いでしょう。
 
 `steering`ディレクトリ内に複数のステアリングを入れている場合、どのようなユースケースでどのファイルを読むのかを `When to Load Steering Files` に記述します。これはKiroへの指示で、「こういう状況になったら、このステアリングファイルを追加で読み込んで」というルールを定義するものです。Home Assistant Power では以下のような感じにしています。
 
@@ -276,23 +276,13 @@ Agent: Uses ha_get_automation_traces to check execution history
 -->
 ```
 
-`Best Practices` にはトークンなどの機密情報の保存方法などを記述しています。`Troubleshooting` には接続エラーなどの、このPowerを使おうとしたときに起きそうなトラブルの解決方法を記述しています。`Resources` には参考文献をリストしています。
-
-フッターは仕様にないのですが、公式Powerには以下のように書いてあるものが多いので、それに合わせています。
-
-```markdown:POWER.md
----
-
-**Package:** `ha-mcp`
-**Source:** [Home Assistant AI Community](https://github.com/homeassistant-ai/ha-mcp)
-**License:** MIT
-```
+`Best Practices` にはトークンなどの機密情報の保存方法などを記述しています。`Troubleshooting` には接続エラーなどの、このPowerを使おうとしたときに起きそうなトラブルの解決方法を記述しています。`Resources` には参考文献をリストしています。フッターは仕様にないのですが、公式Powerには以下のように書いてあるものが多いので、それに合わせています。
 
 ### Kiroに書いてもらう方法
 
-これらを一から書くとなったら大変ですよね。大丈夫です、これらもKiroに書いてもらいましょう。Kiroに公式ドキュメントや参考記事のURLを渡して、それらを読ませた上で `POWER.md` を生成してもらう方法です。
+これらを一から書くとなったら大変ですよね。大丈夫です、これらもKiroに書いてもらいましょう。Kiroに公式ドキュメントや参考記事のURLを渡して、それらを読ませた上で`POWER.md`を生成してもらう方法です。
 
-そのためには、KiroがURLの内容を読めるようにする必要があるので、fetch MCP Server を設定しましょう。MCP Servers パネルの右上の📝アイコンを押してエディターを開くと、以下のような設定が自動入力されるはずです。`"--ignore-robots-txt"` を追加して、`disabled` を `false` に変え、`autoApprove` に `fetch` を追加して保存します。Connecting... の表示の後、✓が表示されたら有効になっています。
+そのためには、KiroがURLの内容を読めるようにする必要があるので、fetch MCP Server を設定しましょう。MCP Servers パネルの右上の📝アイコンを押してエディターを開くと、以下のような設定が自動入力されるはずです。`"--ignore-robots-txt"` を追加して、`disabled`を`false`に変え、`autoApprove`に`fetch`を追加して保存します。Connecting...の表示の後、✓が表示されたら有効になっています。
 
 ```json
 {
@@ -348,14 +338,14 @@ Home Assistant のための Kiro Power を作りたい。
 
 [Obsidian Web Clipper](https://obsidian.md/clipper) を使って役に立つ記事をクリップしている場合は、[MCP server for Obsidian](https://github.com/MarkusPfundstein/mcp-obsidian) をKiroで使えるようにして、「Obsidianからも関連記事を読んで」とかやってみても良いかもしれません。
 
-なお、英語であることは必須でないものの、英語のほうがトークン量を一般的には減らせます。長文の英語を読みたくない場合は、Kiroに「レビュー用に日本語訳を表示して」と尋ねれば、`POWER.md` は英語のまま日本語訳を表示してくれます。
+なお、英語であることは必須でないものの、英語のほうがトークン量を一般的には減らせます。長文の英語を読みたくない場合は、Kiroに「レビュー用に日本語訳を表示して」と尋ねれば、`POWER.md`は英語のまま日本語訳を表示してくれます。
 
 ## ステアリングの作成
 
 ステアリングも人間が一から書くのは大変なので、Kiroに書いてもらっています。
 
 ```markdown
-steering ディレクトリの下に新規ステアリングを英語で作成。
+steeringディレクトリの下に新規ステアリングを英語で作成。
 参考文献は以下のとおり
 
 - https://www.home-assistant.io/docs/scripts/
@@ -375,7 +365,7 @@ steering ディレクトリの下に新規ステアリングを英語で作成�
 新たなものを作るかべきか、適切に判断して。
 ```
 
-これで先ほど作成したステアリングが `POWER.md` に統合されました。
+これで先ほど作成したステアリングが`POWER.md`に統合されました。
 
 このような手順を繰り返して、Home Assistant Power は5個以上のステアリングを含んでいます。似たような Best Practices やTroubleshootingが複数のファイルでできてしまったりするので、「foo.mdとbar.mdの Best Practices をPOWER.mdのそれに統合」などと依頼して整理しました。
 
@@ -398,11 +388,11 @@ Home Assistant Power の最新のステアリングは [kiro\-power\-homeassista
 
 作成した Kiro Power をGitHubで公開すると、他のユーザーはそれを Custom Power として簡単にインポートしてプラグインできます。
 
-Custom Power を使いたい場合、左パネルからPowerパネル選んで、`Add Custom Power` を選びます。`Import power from GitHub` を選んで `POWER.md` が含まれているディレクトリ（例えば [https://github.com/rewse/kiro-power-homeassistant/tree/main/power-homeassistant](https://github.com/rewse/kiro-power-homeassistant/tree/main/power-homeassistant)）を入力するか、GitHubから事前にダウンロードしておいて、`Import power from a folder` を選んで `POWER.md` が含まれているフォルダーを選びます。
+Custom Power を使いたい場合、左パネルからPowerパネル選んで、`Add Custom Power` を選びます。`Import power from GitHub` を選んで`POWER.md`が含まれているディレクトリ（例えば [https://github.com/rewse/kiro-power-homeassistant/tree/main/power-homeassistant](https://github.com/rewse/kiro-power-homeassistant/tree/main/power-homeassistant)）を入力するか、GitHubから事前にダウンロードしておいて、`Import power from a folder` を選んで`POWER.md`が含まれているフォルダーを選びます。
 
 ![Add Custom Power メニュー](/images/kiro-power-creation-guide/add-custom-power-menu.png)
 
-Powerのインポート後、`Try power` を押すと、Kiroが `POWER.md` に書かれた `Onboarding` に従ってセットアップを行います。
+Powerのインポート後、`Try power` を押すと、Kiroが`POWER.md`に書かれた`Onboarding`に従ってセットアップを行います。
 
 ![Powerインポート完了画面](/images/kiro-power-creation-guide/power-import-complete.png)
 *`#homeassistant`などのDescription下のものがPowerをトリガーするキーワード*
