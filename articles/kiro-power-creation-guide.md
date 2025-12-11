@@ -16,7 +16,7 @@ publication_name: aws_japan
 
 そんな Home Assistant のための強力な非公式 MCP Server、[ha-mcp](https://github.com/homeassistant-ai/ha-mcp)がリリースされました。[公式 MCP Server](https://www.home-assistant.io/integrations/mcp_server/) もあったのですが、これは音声アシストで動くエンティティしか制御できないという制限がある一方、ha-mcpは Home Assistant のAPIすべてを網羅する勢いで開発されています。
 
-一方で、ツールが80以上あるという機能の豊富さから、ha-mcpを有効にすると、私の環境ではコンテキスト消費量が14%から33%に爆増してしまいました。ちょうどそんなとき、この問題を解決できそうな機能、Kiro Power がリリースされたので、ちょうど良いとばかりにha-mcpを使って [Home Assistant Power for Kiro](https://github.com/rewse/kiro-power-homeassistant) を作ってみました。
+一方で、ツールが80以上あるという機能の豊富さから、ha-mcpを有効にすると私の環境ではコンテキスト消費量が14%から33%に爆増してしまいました。ちょうどそんなときに、この問題を解決できそうな機能である Kiro Power がリリースされたので、ha-mcpを使って [Home Assistant Power for Kiro](https://github.com/rewse/kiro-power-homeassistant) を作ってみました。
 
 この記事では、自分で作成した経験をもとに Kiro Power の作り方を紹介します。Home Assistant の知識は不要です。Home Assistant は Kiro Power の具体例として登場するだけで、記事の内容は他のどんな MCP Server にも応用できます。
 
