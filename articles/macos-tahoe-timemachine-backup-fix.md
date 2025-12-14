@@ -31,7 +31,7 @@ log show --predicate 'subsystem == "com.apple.TimeMachine"' \
 
 ## 原因
 
-日本語環境のmacOSは、新規バックアップ中に `<ホスト名>のバックアップ` という名前でディスクイメージを作成します。しかし、macOS Tahoe では、非ASCII文字（日本語など）がディスクイメージのファイル名に含まれていると正しく動作しません。
+日本語環境のmacOSは、新規バックアップ中に `<ホスト名>のバックアップ` という名前でディスクイメージを作成します。しかし、macOS Tahoe では、濁点または半濁点のある文字（`バックアップ`の`バ`と`プ`）がディスクイメージのファイル名に含まれていると正しく動作しません。
 
 ## 解決策
 
@@ -46,7 +46,7 @@ log show --predicate 'subsystem == "com.apple.TimeMachine"' \
 
 ## 参考
 
-- [Timemachine Back-up in MacOS 26 (Tahoe) does not work on Synology DS920+ NAS - Apple Community](https://discussions.apple.com/thread/256137390?sortBy=rank&page=3)
+https://discussions.apple.com/thread/256137390?sortBy=rank
 
 ## この記事の動作環境
 
