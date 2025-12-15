@@ -38,9 +38,9 @@ log show --predicate 'subsystem == "com.apple.TimeMachine"' \
 1. `システム設定 > 一般 > 言語と地域 > 優先する言語` で、先頭を`English`に
 1. macOSを再起動
 1. 新規 Time Machine バックアップを取得
-1. `System Settings > General > Language & Region` で、先頭を`日本語`に
+1. `System Settings > General > Language & Region` で、先頭を`日本語`に戻す
 
-![macOS システム設定の言語と地域で優先言語をEnglishに変更した画面](/images/macos-tahoe-timemachine-backup-fix/language-settings-english.png)
+![macOS システム設定の言語と地域で優先言語をEnglishに変更した画面](/images/macos-tahoe-timemachine-nas-fix/language-settings-english.png)
 
 英語環境では `Backups of <ホスト名>` というディスクイメージ名で作成されるため、問題が起きません。バックアップを一度取得した後は既存の `Backups of <ホスト名>` という名のディスクイメージを使うので、優先言語を日本語に戻しても問題ありません。
 
