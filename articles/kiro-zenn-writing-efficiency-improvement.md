@@ -67,6 +67,10 @@ MCPは、AIが外部のツールやデータソースにアクセスするため
 
 ### 外部リソースにアクセスできるようにする: MCP設定
 
+:::message alert
+[Kiro 0.8.0](https://kiro.dev/changelog/web-tools-subagents-contextual-hooks-and-per-file-code-review/) から、デフォルトでURLを読みにいけるようになりました。そのため、以下のMCP設定は不要になりました。 [2025-12-21更新] 
+:::
+
 この後の設定でZennの公式ドキュメントなどの外部サイトを参照しますが、KiroはそのままだとURLを指定しても読みにいかないので、URL先を読みにいける`fetch`を使えるようにします。
 
 MCP Servers パネルの右上の📝アイコンを押してエディターを開くと、以下のような設定が自動入力されるはずです。`disabled`を`false`に変え、`autoApprove`に`fetch`を追加して閉じます。Connecting... の表示の後、✅が表示されたら有効になっています。

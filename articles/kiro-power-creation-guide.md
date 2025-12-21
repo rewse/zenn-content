@@ -282,6 +282,10 @@ Agent: Uses ha_get_automation_traces to check execution history
 
 これらを一から書くとなったら大変ですよね。大丈夫です、これらもKiroに書いてもらいましょう。Kiroに公式ドキュメントや参考記事のURLを渡して、それらを読ませた上で`POWER.md`を生成してもらう方法です。
 
+:::message alert
+[Kiro 0.8.0](https://kiro.dev/changelog/web-tools-subagents-contextual-hooks-and-per-file-code-review/) から、デフォルトでURLを読みにいけるようになりました。そのため、以下の fetch MCP Server の設定は不要になりました。 [2025-12-21更新] 
+:::
+
 そのためには、KiroがURLの内容を読めるようにする必要があるので、fetch MCP Server を設定しましょう。MCP Servers パネルの右上の📝アイコンを押してエディターを開くと、以下のような設定が自動入力されるはずです。`"--ignore-robots-txt"` を追加して、`disabled`を`false`に変え、`autoApprove`に`fetch`を追加して保存します。Connecting...の表示の後、✓が表示されたら有効になっています。
 
 ```json
