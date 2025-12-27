@@ -11,7 +11,7 @@ published: true
 ---
 ## TL;DR
 
-ハードリンクを多用するバックアップツールがBtrfsファイルシステムのメタデータ領域を圧迫していました。不要なバックアップセットを削除して領域を解放することで、メタデータ領域不足による書き込みエラーを解決しました。
+ハードリンクを多用するバックアップツールがBtrfsファイルシステムのメタデータ領域を圧迫していました。チャンクのバランスを行って割当て可能なチャンクを増やし、不要なバックアップセットを削除して領域を解放することで、メタデータ領域不足による書き込みエラーを解決しました。
 
 ## 問題の発生
 
@@ -42,29 +42,6 @@ touch: cannot touch 'dummy': No space left on device
 
 バックアップ先の`/volume1`は64%しか使用していないにもかかわらず `No space left on device` エラーが起きます。`touch`コマンドは0byteのファイルを作成するにもかかわらず失敗するということは、実際には容量不足ではなさそうです。
 
-### inode確認
-
-こういうときはinode不足が考えられるので、inodeの使用状況を確認してみます。
-
-```sh
-tats@guppy:~$ df -i
-Filesystem              Inodes IUsed   IFree IUse% Mounted on
-/dev/md0                524288 43534  480754    9% /
-devtmpfs               1010681   884 1009797    1% /dev
-tmpfs                  1011641     2 1011639    1% /dev/shm
-tmpfs                  1011641  1485 1010156    1% /run
-tmpfs                  1011641    10 1011631    1% /sys/fs/cgroup
-tmpfs                  1011641   150 1011491    1% /tmp
-/dev/loop0                8192    10    8182    1% /tmp/SynologyAuthService
-/dev/mapper/cachedev_1       0     0       0     - /volume2
-/dev/mapper/cachedev_2       0     0       0     - /volume1
-/dev/mapper/cachedev_0       0     0       0     - /volume3
-/volume3/@Archive@           0     0       0     - /volume3/Archive
-/volume2/@homes@             0     0       0     - /volume2/homes
-```
-
-`/volume1`のinode状況はうまく取得できませんでした。
-
 ### メタデータ領域の確認
 
 Btrfsファイルシステムは`btrfs`コマンドで使用状況の詳細を確認できます。
@@ -77,17 +54,62 @@ Metadata, DUP: total=111.50GiB, used=109.38GiB
 GlobalReserve, single: total=2.00GiB, used=0.00B
 ```
 
-メタデータ領域は111.50GB中109.38GB使っており、2%ほどしか空き容量がありません。どうもこれが原因のようです。
+メタデータ領域は111.50GiB中109.38GiB使っており、2%ほどしか空き容量がありません。
 
 :::message
 Btrfsでは、実際のファイルデータとは別に「メタデータ」という領域があります。メタデータにはファイル名 / 権限 / タイムスタンプ / ディレクトリ構造 / ハードリンクの情報などが格納されます。ハードリンクが大量にあると、同じファイルを指す複数のメタデータエントリを必要とするため、メタデータ領域を大量に消費します。
 :::
 
+チャンクの割当て状況も見てみましょう。
+
+```sh
+tats@guppy:/volume1$ sudo btrfs filesystem usage /volume1
+Overall:
+    Device size:                   3.63TiB
+    Device allocated:              3.63TiB
+    Device unallocated:            1.00MiB
+    Device missing:                3.63TiB
+    Used:                          1.25TiB
+    Free (estimated):              2.17TiB      (min: 2.17TiB)
+    Data ratio:                       1.00
+    Metadata ratio:                   2.00
+    Global reserve:              873.80MiB      (used: 0.00B)
+```
+
+Device unallocated（未割当て）が1MiBしかないため、追加でチャンクを割り当てることできません。つまり、割当て済のメタデータ領域をほぼ使い切っており、追加で割り当てるチャンクも残っていない状況です。そのため、メタデータ領域の不足で `No space on device` エラーになっています。
+
 ## 解決方法
+
+### チャンクの再配置と統合
+
+チャンクが断片化している可能性があるため、チャンクのバランス（いわゆるデフラグ）を行います。`-musage=1`で、メタデータ使用率1%以下のチャンクのみを再配置することで、まずはタイパ良く試してみます。
+
+```sh
+tats@guppy:/volume1$ sudo btrfs balance start -musage=1 /volume1
+Done, had to relocate 184 out of 594 chunks
+```
+
+184個のチャンクの再配置が行われました。再度割当て状況を見てみましょう。
+
+```sh
+tats@guppy:/volume1$ sudo btrfs filesystem usage /volume1
+Overall:
+    Device size:                   3.63TiB
+    Device allocated:              3.45TiB
+    Device unallocated:          183.98GiB
+    Device missing:                3.63TiB
+    Used:                          1.25TiB
+    Free (estimated):              2.35TiB      (min: 2.26TiB)
+    Data ratio:                       1.00
+    Metadata ratio:                   2.00
+    Global reserve:              875.28MiB      (used: 0.00B)
+```
+
+1%以下だけでも Device unallocated が183.98GiBに増えました。これで今後はメタデータ領域が不足したときに追加のチャンクを割り当てることができるようになりました。
 
 ### バックアップセットの削除
 
-私はUbuntuのバックアップに [Rsync time backup](https://github.com/laurent22/rsync-time-backup) というツールを使っています。このツールは各バックアップセット間で変更のないファイルはハードリンクを使用しています。そのため容量は多重で消費しないものの、inodeは100個のバックアップセットがあったら100倍使用します。これがinodeを多量に消費している可能性が高いため、3分の1程度のバックアップセットを削除してみました。その後、ファイルシステムの状況を再度確認してみます。
+私はUbuntuのバックアップに [Rsync time backup](https://github.com/laurent22/rsync-time-backup) というツールを使っています。このツールは各バックアップセット間で変更のないファイルはハードリンクを使用しています。そのため容量は多重で消費しないものの、inodeは100個のバックアップセットがあったら100倍使用します。これがメタデータを多量に消費している可能性が高いため、3分の1程度のバックアップセットを削除してみました。その後、ファイルシステムの状況を再度確認してみます。
 
 ```sh
 tats@guppy:/volume1$ sudo btrfs filesystem df /volume1
@@ -97,9 +119,30 @@ Metadata, DUP: total=112.99GiB, used=76.92GiB
 GlobalReserve, single: total=2.00GiB, used=0.00B
 ```
 
-メタデータ領域の使用量が109.38GBから76.92GBに減り、問題なくファイルが作成できるようになりました。
+メタデータ領域の使用量が109.38GiBから76.92GiBに減り、問題なくファイルが作成できるようになりました。
 
-## 予防策: Rsync time backup の設定変更
+## 予防策
+
+## 定期タスクの設定
+
+DSMの Task Scheduler で `btrfs balance start` を週次で実行するようにします。
+
+1. Control Panel > Task Scheduler > Create > Scheduled Task > User-defined script
+2. General
+    - Task: Balance Btrfs
+    - User: root
+3. Schedule
+    - Run on the following days
+      - Repeat: Weekly, Wednesday
+    - Time
+      - Start time: 04:32
+4. Task Settings
+    - Run Command
+      - `/sbin/btrfs balance start -musage=1 /volume1; /sbin/btrfs balance start -musage=1 /volume2`
+
+![DSM Task SchedulerでBtrfsバランスタスクを設定している画面](/images/synology-nas-no-space-left-btrfs-metadata/dsm-task-scheduler-btrfs-balance.png)
+
+## Rsync time backup の設定変更
 
 Rsync time backup は`--strategy`オプションで有効期限とバックアップセット数を設定できます。デフォルトは `"1:1 30:7 365:30"` で、これは「1日後は1日に1個のバックアップセットのみ維持する。30日後は7日に1個のバックアップセットのみ維持する。365日後は30日に1個のバックアップセットを維持する」の意味です。週次のバックアップセットは1年分もいらないので、これを3カ月分に変更しました。
 
@@ -119,10 +162,11 @@ Synology NAS で `No space left on device` エラーが発生した際は、単�
 
 対処法：
 - `btrfs filesystem df` でメタデータ領域の使用状況を確認
+- `btrfs filesystem usage` でチャンクの割当て状況を確認
+- `btrfs balance start -musage=1` でチャンクのバランスを実行
 - 不要なバックアップセットを削除してメタデータ領域を解放
+- チャンクのバランスを定期的に実行
 - 定期的なバックアップセットの整理を検討
-
-このような問題を避けるため、バックアップ戦略を見直し、保持するバックアップセット数を適切に管理することが重要です。
 
 ## この記事の動作環境
 
