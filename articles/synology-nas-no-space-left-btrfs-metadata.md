@@ -76,7 +76,7 @@ Overall:
     Global reserve:              873.80MiB      (used: 0.00B)
 ```
 
-Device unallocated（未割当て）が1MiBしかないため、追加でチャンクを割り当てることできません。つまり、割当て済のメタデータ領域をほぼ使い切っており、追加で割り当てるチャンクも残っていない状況です。そのため、メタデータ領域の不足で `No space on device` エラーになっています。
+Device unallocated（未割当て）が1MiBしかないため、追加でチャンクを割り当てることできません。つまり、割当て済のメタデータ領域をほぼ使い切っているのに、追加で割り当てるチャンクも残っていない状況です。そのため、メタデータ領域の不足で `No space on device` エラーになっています。
 
 ## 解決方法
 
@@ -123,7 +123,7 @@ GlobalReserve, single: total=2.00GiB, used=0.00B
 
 ## 予防策
 
-## 定期タスクの設定
+### 定期タスクの設定
 
 DSMの Task Scheduler で `btrfs balance start` を週次で実行するようにします。
 
@@ -142,7 +142,7 @@ DSMの Task Scheduler で `btrfs balance start` を週次で実行するよう�
 
 ![DSM Task SchedulerでBtrfsバランスタスクを設定している画面](/images/synology-nas-no-space-left-btrfs-metadata/dsm-task-scheduler-btrfs-balance.png)
 
-## Rsync time backup の設定変更
+### Rsync time backup の設定変更
 
 Rsync time backup は`--strategy`オプションで有効期限とバックアップセット数を設定できます。デフォルトは `"1:1 30:7 365:30"` で、これは「1日後は1日に1個のバックアップセットのみ維持する。30日後は7日に1個のバックアップセットのみ維持する。365日後は30日に1個のバックアップセットを維持する」の意味です。週次のバックアップセットは1年分もいらないので、これを3カ月分に変更しました。
 
