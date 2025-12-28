@@ -128,17 +128,14 @@ GlobalReserve, single: total=2.00GiB, used=0.00B
 DSMの Task Scheduler で `btrfs balance start` を週次で実行するようにします。
 
 1. Control Panel > Task Scheduler > Create > Scheduled Task > User-defined script
-2. General
-    - Task: Balance Btrfs
-    - User: root
-3. Schedule
-    - Run on the following days
-      - Repeat: Weekly, Wednesday
-    - Time
-      - Start time: 04:32
-4. Task Settings
-    - Run Command
-      - `/sbin/btrfs balance start -musage=1 /volume1; /sbin/btrfs balance start -musage=1 /volume2`
+2. General > User を`root`に
+3. Scheduleはお好みで
+4. Task Settings > Run Command に以下を設定
+
+```bash
+/sbin/btrfs balance start -musage=1 /volume1
+/sbin/btrfs balance start -musage=1 /volume2  # 複数ボリュームある場合
+```
 
 ![DSM Task SchedulerでBtrfsバランスタスクを設定している画面](/images/synology-nas-no-space-left-btrfs-metadata/dsm-task-scheduler-btrfs-balance.png)
 
