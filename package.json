@@ -19,7 +19,7 @@
   "type": "commonjs",
   "dependencies": {
     "textlint-rule-ja-space-around-phrase": ">=1.1.0",
-    "zenn-cli": "^0.2.11"
+    "zenn-cli": "^0.4.4"
   },
   "devDependencies": {
     "textlint-config-rewse": ">=1.4.0"
