@@ -172,4 +172,10 @@ https://github.com/rewse/ansible-playbooks/blob/master/roles/lmstudio/files/lmst
 
 Spokenlyの特徴的な機能として [Clipboard Dictation](https://spokenly.app/docs/ios/clipboard-dictation) というものがあり、アクションボタンや背面タップからショートカットを起動することで、キーボードインターフェースを使わずに音声を入力できます。入力を終えたら再びショートカットを起動すると、整形化された文章がクリップボードに入ります。ペーストする手間はありますが、ライブアクティビティとして常駐したり、キーボードが増えたりする点が気になる方はこちらも良い選択肢です。
 
+## この記事の動作環境
+
+- macOS: Tahoe 26.4 Public Beta 2
+- Spokenly: 2.16.0
+- LM Studio: 0.4.6+1
+
 [^1]: 開発者は [Vadim Ahmerov](https://www.linkedin.com/in/vaahmerov/) さんです
