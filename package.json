@@ -23,5 +23,8 @@
   },
   "devDependencies": {
     "textlint-config-rewse": ">=1.4.0"
+  },
+  "overrides": {
+    "ip-address": ">=10.1.1"
   }
 }
