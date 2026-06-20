@@ -25,6 +25,8 @@
     "textlint-config-rewse": ">=1.4.0"
   },
   "overrides": {
-    "ip-address": ">=10.1.1"
+    "hono": ">=4.12.25",
+    "ip-address": ">=10.1.1",
+    "js-yaml": ">=4.2.0"
   }
 }
