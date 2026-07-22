@@ -25,8 +25,10 @@
     "textlint-config-rewse": ">=1.4.0"
   },
   "overrides": {
-    "hono": ">=4.12.25",
+    "@hono/node-server": ">=2.0.5",
+    "fast-uri": ">=3.1.4",
+    "hono": ">=4.12.27",
     "ip-address": ">=10.1.1",
-    "js-yaml": ">=4.2.0"
+    "js-yaml": ">=4.3.0"
   }
 }
