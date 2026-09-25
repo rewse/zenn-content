@@ -1,95 +1,51 @@
 # Zenn Content Repository
 
-Zennプラットフォームで技術記事や本を公開するためのGitHub連携リポジトリです。ローカルでの執筆から自動公開まで、シームレスなワークフローを提供します。
-
-## 概要
-
-このリポジトリはZennプラットフォームと連携し、技術記事や本を管理・公開します。ローカル環境でMarkdown形式のコンテンツを執筆し、GitHubにプッシュすると自動的にZennへ公開されます。
-
-### 主な機能
-
-- GitHub連携によるプッシュ時の自動公開
-- お気に入りのエディタでのローカル執筆
-- Zenn CLI によるローカルプレビュー
-- リポジトリ内での一元的な画像管理
-- Gitによる変更履歴の追跡
-
-## 技術スタック
-
-- zenn-cli: Zennプラットフォーム公式CLIツール
-- Node.js: CommonJSモジュール
-- npmパッケージマネージャー
+[Zenn](https://zenn.dev/) に公開する記事と本を管理するリポジトリです。ZennのGitHub連携を使っているため、`main` ブランチにプッシュすると `published: true` の記事と本がZennに反映されます。
 
 ## セットアップ
 
-### 前提条件
-
-- Node.jsがインストールされていること
-- GitHubアカウントがZennアカウントと連携されていること
-
-### インストール
+Node.js 22 以上が必要です（zenn-cliの動作要件）。Zennアカウントとこのリポジトリを [GitHub連携](https://zenn.dev/zenn/articles/connect-to-github)しておきます。
 
 ```bash
-# 依存関係をインストール
 npm install
 ```
 
 ## 使い方
 
-### 新しい記事を作成
-
 ```bash
 # 記事を作成
-npx zenn new:article
-
-# オプション付きで作成
 npx zenn new:article --slug article-slug --title "タイトル" --type tech --emoji ✨
-```
 
-### 新しい本を作成
-
-```bash
 # 本を作成
-npx zenn new:book
-
-# スラッグ指定で作成
 npx zenn new:book --slug book-slug
-```
 
-### ローカルプレビュー
-
-```bash
-# プレビューサーバーを起動
+# http://localhost:8000 でプレビュー
 npx zenn preview
+
+# 記事の文章を textlint でチェック
+npm run lint
 ```
 
-ブラウザで http://localhost:8000 にアクセスしてコンテンツをプレビューできます。
+### 公開・更新・削除
 
-### 記事を公開
+記事の Front Matter で `published: true` にしてプッシュすると公開されます。同じスラッグのまま編集してプッシュすれば更新になり、ファイル名（スラッグ）を変えると別の記事として扱われます。コミットメッセージに `[skip ci]` を含めると、そのプッシュではデプロイされません。
 
-1. 記事の Front Matter で `published: true` を設定
-2. GitHubリポジトリにコミット＆プッシュ
-3. コンテンツが自動的にZennへ公開される
+ファイルを削除してもZenn上の記事は消えないので、削除は [ダッシュボード](https://zenn.dev/dashboard) から行います。
 
-```bash
-git add .
-git commit -m "feat(article): add new article about docker"
-git push origin main
-```
-
-## プロジェクト構造
+## ディレクトリ構成
 
 ```
 .
-├── .kiro/             # Kiro AI 設定
-├── articles/          # 技術記事
-├── books/             # 本のコンテンツ
-├── images/            # 記事・本で使用する画像
-│   └── article-slug/  # 記事ごとに整理
-└── package.json       # プロジェクト設定
+├── .github/workflows/  # シークレットと脆弱性のスキャン
+├── articles/           # 記事（<slug>.md）
+├── books/              # 本（<slug>/config.yaml とチャプター）
+├── images/             # 画像（<slug>/ ごとに配置）
+├── .textlintrc.json    # textlint の設定
+├── AGENTS.md           # AI エージェント向けの執筆・コミット規約
+└── package.json
 ```
 
-## 記事の Front Matter
+## 記事のFront Matter
 
 ```yaml
 ---
@@ -97,59 +53,31 @@ title: "記事のタイトル"
 emoji: "😸"              # アイコン絵文字（1文字）
 type: "tech"             # "tech" または "idea"
 topics: ["docker", "aws", "devops"]  # タグ（最大5個）
-published: true          # 公開状態
+published: true          # false で下書き
 published_at: 2050-06-12 09:03  # オプション: 公開予約日時
 ---
 ```
 
-### 記事タイプ
+`type` は、プログラミングやインフラなど技術の具体的な内容なら `tech`、キャリアやマネジメント、技術に関する考え方やまとめ記事なら `idea` にします（[選び方](https://zenn.dev/tech-or-idea)）。
 
-- tech: プログラミング、インフラ、ハードウェアなどの技術に関する具体的な内容
-- idea: キャリア、マネジメント、抽象的な考え方、情報のまとめ記事
+## 画像
 
-## 画像管理
-
-### 画像の配置
-
-```
-images/
-└── article-slug/
-    ├── screenshot-1.png
-    └── diagram.jpg
-```
-
-### 画像の参照
+画像は `images/<slug>/` に置き、記事からは `/images/` から始まる絶対パスを指定します。相対パスを使うとZenn上の画像が表示されません。
 
 ```markdown
 ![代替テキスト](/images/article-slug/screenshot-1.png)
 ```
 
-### 制限事項
+対応形式は `.png` `.jpg` `.jpeg` `.gif` `.webp` で、1ファイル3MBまでです。これを超えるとデプロイが失敗します。
 
-- ファイルサイズ: 最大3MB
-- 対応フォーマット: `.png` `.jpg` `.jpeg` `.gif` `.webp`
+## 執筆ガイドライン
 
-## コンテンツガイドライン
+Zennの [コミュニティガイドライン](https://zenn.dev/guideline) に従います。タイトルは内容と一致させ、冒頭で記事の概要と対象読者を示します。再現できるように環境やバージョンを書き、公式情報に自分の経験や考察を加えます。宣伝が主目的の投稿、誇張したタイトル、引用の範囲を超えた転載、正確さを確認していないAI生成の文章は避けます。
 
-### 推奨される記事の特徴
-
-- タイトルと内容が一致している
-- 冒頭に明確な概要がある
-- 環境や再現条件が詳細に記述されている
-- 対象読者が明確
-- 個人の経験や考察が含まれている
-
-### 避けるべき内容
-
-- 広告や宣伝が主目的の投稿
-- 誇張的なクリックベイトタイトル
-- 著作権を侵害するコンテンツ
-- 検証されていないAI生成コンテンツ
+記法、コミットメッセージ、その他の細かい規約は [AGENTS.md](AGENTS.md) にまとめています。
 
 ## 参考リンク
 
+- [Markdown記法](https://zenn.dev/zenn/articles/markdown-guide)
+- [Zenn CLIの使い方](https://zenn.dev/zenn/articles/install-zenn-cli)
 - [Zennについて](https://zenn.dev/about)
-- [コミュニティガイドライン](https://zenn.dev/guideline)
-- [GitHub連携ガイド](https://zenn.dev/zenn/articles/connect-to-github)
-- [Markdownガイド](https://zenn.dev/zenn/articles/markdown-guide)
-- [Zenn CLI](https://zenn.dev/zenn/articles/install-zenn-cli)
