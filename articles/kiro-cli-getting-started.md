@@ -40,7 +40,7 @@ Next steps:
 Use the command "kiro-cli" to get started!
 ```
 
-Homebrewでインストールすることもできます。
+Homebrewでもインストールできます。
 
 ```sh
 [~]% brew install kiro-cli
@@ -132,7 +132,7 @@ Kiro IDE で`~/.kiro/settings/mcp.json`にMCPサーバーの設定をしてい�
 :::message
 MCPは、AIが外部ツールやサービスと連携するための仕組みです。例えばWeb検索 / ファイル取得 / API呼び出しなどの機能をAIに追加できます。MCPサーバーを設定することで、Kiroの機能を拡張できます。
 
-KiroのMCPサーバーの設定はプロジェクト単位に定義することもできますが、全プロジェクトで共通に使いたいものは`~/.kiro/settings/mcp.json`に記述します。
+KiroのMCPサーバーの設定はプロジェクト単位にも定義できますが、全プロジェクトで共通に使いたいものは`~/.kiro/settings/mcp.json`に記述します。
 :::
 
 読み込まれた設定を確認するには、`/mcp`または`/tools`を使用します。
@@ -172,12 +172,12 @@ fetch (MCP)
 
 ### Steeringの自動読み込み
 
-同様に、`~/.kiro/steering`に保存されているSteeringも Kiro CLI に自動的に読み込まれます。
+同様に、`~/.kiro/steering`に保存されているSteeringも Kiro CLI が自動的に読み込みます。
 
 :::message
 Steeringは、Kiroの振る舞いをカスタマイズするためのルールや指示を記述したファイルです。コーディング規約 / コミットメッセージの形式 / プロジェクト固有のルールなどを定義することで、Kiroがそれらに従った提案をしてくれるようになります。
 
-Steeringはプロジェクト単位に定義することもできますが、全プロジェクトで共通で使いたいものは`~/.kiro/steering`に保存します。
+Steeringはプロジェクト単位にも定義できますが、全プロジェクトで共通に使いたいものは`~/.kiro/steering`に保存します。
 :::
 
 読み込まれた設定を確認するには、`/context show` コマンドを使います。
@@ -214,7 +214,7 @@ Context files total: 2.8% of context window
 
 ### OSのトラブルシューティング
 
-Kiro IDE より Kiro CLI のほうが使いやすい用途の一つにOSのトラブルシューティングがあります。例えば、Cronを設定したものの実行されない問題が起きているとしましょう。
+Kiro IDE より Kiro CLI のほうが使いやすい用途の1つにOSのトラブルシューティングがあります。例えば、Cronを設定したものの実行されない問題が起きているとしましょう。
 
 ```
 > /etc/cron.d/dummy が動作していない。原因はなに？
@@ -355,7 +355,7 @@ Allow this action? Use 't' to trust (always allow) this tool for the session. [y
 
 MCPサーバーを使う際、Kiro IDE と共通の`~/.kiro/settings/mcp.json`には追加せず、Kiro CLI だけで使いたい場合があります。例えば、開発プロジェクトには不要だけどCLIでの調べ物に便利なツールや、特定の用途専用のMCPサーバーなどです。
 
-一つのやり方はプロジェクト単位で定義することです。プロジェクト（GitHubリポジトリ）のルートディレクトリに`.kiro/settings/mcp.json`を作成すれば、そのディレクトリでKiroを動かしたときだけ読まれます。しかし、Kiro CLI だと特定のディレクトリに移動せず、どこでも使いたいときもあるでしょう。
+1つのやり方はプロジェクト単位で定義することです。プロジェクト（GitHubリポジトリ）のルートディレクトリに`.kiro/settings/mcp.json`を作成すれば、そのディレクトリでKiroを動かしたときだけ読まれます。しかし、Kiro CLI だと特定のディレクトリに移動せず、どこでも使いたいときもあるでしょう。
 
 このような場合は、Custom Agent を作成することで Kiro CLI 専用の設定を持つことができます。作成時は `/agent create` ではなく `/agent generate` を使うとプロンプトを自動生成してくれます。
 
@@ -392,7 +392,7 @@ Select MCP servers (use Space to toggle, Enter to confirm):
 }
 ```
 
-このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、例として AWS Documentation MCP サーバーの定義を追加します。これによって、この MCP サーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
+このファイルは `~/.kiro/agents/aws-doc.json` に保存されているので、例として AWS Documentation MCP サーバーの定義を追加します。これによって、このMCPサーバーは`aws-doc`エージェントを使うときしか読み込まれないようになります。
 
 `"useLegacyMcpJson": false` だと`~/.kiro/settings/mcp.json`とプロジェクトのルートディレクトリにある`.kiro/settings/mcp.json`が読み込まれません。つまり、AWS Documentation MCPサーバーしか使わないエージェントになります。`"useLegacyMcpJson": true` にすれば両方の`mcp.json`も合わせて読み込むようになります。
 
