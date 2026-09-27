@@ -47,7 +47,7 @@ KiroのUIを日本語に変更したい場合は `View > Command Palette...` メ
 
 #### Specs: 今回は使用しない
 
-Kiroには、チャットから始めて開発するVibeモードと、Kiroの大きな特徴の一つである、計画から始めて開発するSpecモードがあります。ただし、本記事ではVibeしか使わないため、このパネルは使用しません。
+Kiroには、チャットから始めて開発するVibeモードと、Kiroの大きな特徴の1つである、計画から始めて開発するSpecモードがあります。ただし、本記事ではVibeしか使わないため、このパネルは使用しません。
 
 #### Agent Hooks: 今回は使用しない
 
@@ -68,7 +68,7 @@ MCPは、AIが外部のツールやデータソースにアクセスするため
 ### 外部リソースにアクセスできるようにする: MCP設定
 
 :::message alert
-[Kiro 0.8.0](https://kiro.dev/changelog/web-tools-subagents-contextual-hooks-and-per-file-code-review/) から、デフォルトでURLを読みにいけるようになりました。そのため、以下のMCP設定は不要になりました。 [2025-12-21更新] 
+[Kiro 0.8.0](https://kiro.dev/changelog/web-tools-subagents-contextual-hooks-and-per-file-code-review/) から、デフォルトでURLを読み込めるようになりました。そのため、以下のMCP設定は不要になりました。 [2025-12-21更新] 
 :::
 
 この後の設定でZennの公式ドキュメントなどの外部サイトを参照しますが、KiroはそのままだとURLを指定しても読みにいかないので、URL先を読みにいける`fetch`を使えるようにします。
@@ -99,7 +99,7 @@ MCP Servers パネルの右上の📝アイコンを押してエディターを�
 
 ### 基本的な知識ファイルを自動生成する
 
-Agent Steering パネルにある `Generate Steering Docs` ボタンを押すとproduct / structure / techという3つのファイルが作成されます。
+Agent Steering パネルにある `Generate Steering Docs` ボタンを押すと product / structure / tech という3つのファイルが作成されます。
 
 ![Steering Docs 生成ボタン](/images/kiro-zenn-writing-efficiency-improvement/generate-steering-docs-button.png)
 
@@ -229,7 +229,7 @@ https://www.conventionalcommits.org/en/v1.0.0/ を参照して、
 Zennの記事リポジトリであることを想定した良い Agent Steering ができました。
 
 :::message
-言語やコミットメッセージなどの Agent Steering は、全てのプロジェクトで共通利用したいかもしれません。これらのファイルをもっと汎用的な内容にして`~/.kiro/steering`に保存することで、全てのプロジェクトで適用される Global Agent Steering にすることもできます。
+言語やコミットメッセージなどの Agent Steering は、全てのプロジェクトで共通利用したいかもしれません。これらのファイルをもっと汎用的な内容にして`~/.kiro/steering`に保存することで、全てのプロジェクトで適用される Global Agent Steering にもできます。
 :::
 
 #### ZennのMarkdown記法を教える設定
@@ -258,7 +258,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 ![Zenn Markdown標準リファイン後の画面](/images/kiro-zenn-writing-efficiency-improvement/zenn-markdown-standards-refined.png)
 
 :::message
-私が実際に使用している Agent Steering は以下から参照することができます。
+私が実際に使用している Agent Steering は以下から参照できます。
 - [zenn\-content/\.kiro/steering at main · rewse/zenn\-content](https://github.com/rewse/zenn-content/tree/main/.kiro/steering)
 - [dotfiles/dot\_kiro/steering at main · rewse/dotfiles](https://github.com/rewse/dotfiles/tree/main/dot_kiro/steering)
 :::
@@ -397,7 +397,7 @@ https://zenn.dev/zenn/articles/markdown-guide を参照して、
 
 ## 補足: 無料枠でどのくらい使える？ クレジット使用量の実例
 
-月間クレジット使用量はウィンドウ右下に表示されています。今回は47.39クレジットから始めて、すべての Agent Steering を作成し終えたときに53.99クレジットだったので、環境構築に6.6クレジット使用しました。コミットしたときには62.86クレジットだったので、一つの記事の校正に8.87クレジット使いました。そのため、校正内容や記事の規模にもよりますが、無料枠の毎月50クレジットで月に5本程度の校正をKiroで行えそうです。初回サインアップから30日間は500クレジットのボーナスがもらえるので、いろいろ試してみてください。無料枠で足りないほど記事を書いたり、Kiroを使いこなしたりしてクレジット消費が多い場合は、月額$20払うと毎月1,000クレジットになります。
+月間クレジット使用量はウィンドウ右下に表示されています。今回は47.39クレジットから始めて、すべての Agent Steering を作成し終えたときに53.99クレジットだったので、環境構築に6.6クレジット使用しました。コミットしたときには62.86クレジットだったので、1つの記事の校正に8.87クレジット使いました。そのため、校正内容や記事の規模にもよりますが、無料枠の毎月50クレジットで月に5本程度の校正をKiroで行えそうです。初回サインアップから30日間は500クレジットのボーナスがもらえるので、いろいろ試してみてください。無料枠で足りないほど記事を書いたり、Kiroを使いこなしたりしてクレジット消費が多い場合は、月額$20払うと毎月1,000クレジットになります。
 
 [![Kiroの料金プラン画面。KiroFREE（$0/月、50クレジット）、KiroPRO（$20/月、1,000クレジット）、KiroPRO+（$40/月、2,000クレジット）、KiroPOWER（$200/月、10,000クレジット）の4つのプラン](/images/kiro-zenn-writing-efficiency-improvement/kiro-credit-usage.png)](https://kiro.dev/pricing/)
 
