@@ -36,7 +36,7 @@ Kiro Power は、この問題を動的読み込みで解決します。具体的
 ステアリングは、Kiroの振る舞いをカスタマイズするためのルールや指示を記述したファイルです。コーディング規約 / コミットメッセージの形式 / プロジェクト固有のルールなどを定義することで、Kiroがそれらに従った提案をしてくれるようになります。
 :::
 
-さらに、MCP Server の設定とステアリングを一つのパッケージとして配布できるため、誰かが作った Kiro Power を簡単にインポートしてプラグインできます。
+さらに、MCP Server の設定とステアリングを1つのパッケージとして配布できるため、誰かが作った Kiro Power を簡単にインポートしてプラグインできます。
 
 他のAIコーディングツールを使っている方向けに補足すると、Claude Code や OpenAI Codex にはSkillsというAIに専門知識をプラグインする仕組みがあります。Kiro Power はそれに MCP Server を組み合わせたもの、つまり Power = Skills + MCP として考えれば分かりやすいでしょう。もっと詳しく知りたい方は、公式ブログの [Introducing Kiro powers](https://kiro.dev/blog/introducing-powers/)（[日本語訳](https://aws.amazon.com/jp/blogs/news/introducing-powers/)）が参考になります。
 
@@ -57,7 +57,7 @@ power-small/
   └── mcp.json
 ```
 
-ただし、この構成だと`POWER.md`の内容すべてが一回の動的ロードで読まれます。`POWER.md`がけっこう大きいのに、一部の内容は限られた状況にしか関係ないという場合、コンテキスト消費が無駄になります。そのような場合は以下のように`steering`ディレクトリ内の別ファイルとすることで、その状況になったとき改めてそのファイルだけ動的ロードできるようになります。ファイル名は`.md`で終われば、あとは自由です。
+ただし、この構成だと`POWER.md`の内容すべてが1回の動的ロードで読まれます。`POWER.md`がけっこう大きいのに、一部の内容は限られた状況にしか関係ないという場合、コンテキスト消費が無駄になります。そのような場合は以下のように`steering`ディレクトリ内の別ファイルとすることで、その状況になったとき改めてそのファイルだけ動的ロードできるようになります。ファイル名は`.md`で終われば、あとは自由です。
 
 ```
 power-medium/
@@ -81,8 +81,11 @@ power-large/
 
 なお、Powerのディレクトリには隠しファイルや実行ファイルなどを含むことができません。例えば、`.git`ディレクトリが含まれているとインポートでエラーになります。
 
+<!-- The alt text quotes the English error message from Kiro verbatim, so Japanese sentence rules do not apply to it. -->
+<!-- textlint-disable japanese/sentence-length,ja-technical-writing/max-comma -->
 ![Unable to install power: Power validation failed: Power contains disallowed files: - .git - .github - .gitignore - .kiro - scripts/bump_version.sh Powers should only contain: POWER.md, mcp.json, and steering/*.md files. Binary executables, scripts, hidden files, credentials, and archives are not permitted in power packages.](/images/kiro-power-creation-guide/power-validation-failed-error.png)
 *`.git`などが含まれているときに発生する Power validation failed エラー*
+<!-- textlint-enable japanese/sentence-length,ja-technical-writing/max-comma -->
 
 そのため、GitHubで公開する場合は、以下のようにPower本体をサブディレクトリに配置する構成をお薦めします。[公式マニュアル](https://kiro.dev/docs/powers/create/#sharing-your-power)ではリポジトリのルートに`POWER.md`などを置く例が紹介されていますが、その構成だと`.git`などが含まれてしまうためです。
 
@@ -157,10 +160,10 @@ author: "Shibata, Tats"
 
 キーワード選定のポイントは以下のとおりです。
 
-- 固有名詞を優先する: Powerはユーザーレベルでインポートされるため、一般的な用語は避けましょう。例えば`HA`を含めてしまうと、Home Assistant とまったく関係ないプロジェクトで High Availability（高可用性）のつもりで「HA環境も追加して」と言ったときに Home Assistant Power が読み込まれてしまいます
-- 表記揺れを網羅する: `homeassistant`（スペースなし）と `home assistant`（スペースあり）のように、ユーザーが使いそうな表記を複数登録しておきます
-- 関連ツール名を含める: `ha-mcp`のように、このPowerで使う MCP Server の名前を含めておくと、ユーザーがそのツール名でも呼び出せます
-- 特徴的な機能名を含める: `lovelace`（Home Assistant のダッシュボード機能）のように、そのドメイン特有の用語を含めておくと、詳しいユーザーがピンポイントで呼び出せます
+- 固有名詞を優先する: Powerはユーザーレベルでインポートされるため、一般的な用語は避ける。例えば`HA`を含めてしまうと、Home Assistant とまったく関係ないプロジェクトで High Availability（高可用性）のつもりで「HA環境も追加して」と言ったときに Home Assistant Power が読み込まれてしまう
+- 表記揺れを網羅する: `homeassistant`（スペースなし）と `home assistant`（スペースあり）のように、ユーザーが使いそうな表記を複数登録しておく
+- 関連ツール名を含める: `ha-mcp`のように、このPowerで使う MCP Server の名前を含めておくと、ユーザーがそのツール名でも呼び出せる
+- 特徴的な機能名を含める: `lovelace`（Home Assistant のダッシュボード機能）のように、そのドメイン特有の用語を含めておくと、詳しいユーザーがピンポイントで呼び出せる
 
 ### 本文の構成
 
@@ -283,7 +286,7 @@ Agent: Uses ha_get_automation_traces to check execution history
 これらを一から書くとなったら大変ですよね。大丈夫です、これらもKiroに書いてもらいましょう。Kiroに公式ドキュメントや参考記事のURLを渡して、それらを読ませた上で`POWER.md`を生成してもらう方法です。
 
 :::message alert
-[Kiro 0.8.0](https://kiro.dev/changelog/web-tools-subagents-contextual-hooks-and-per-file-code-review/) から、デフォルトでURLを読みにいけるようになりました。そのため、以下の fetch MCP Server の設定は不要になりました。 [2025-12-21更新] 
+[Kiro 0.8.0](https://kiro.dev/changelog/web-tools-subagents-contextual-hooks-and-per-file-code-review/) から、デフォルトでURLを読み込めるようになりました。そのため、以下の fetch MCP Server の設定は不要になりました。 [2025-12-21更新] 
 :::
 
 そのためには、KiroがURLの内容を読めるようにする必要があるので、fetch MCP Server を設定しましょう。MCP Servers パネルの右上の📝アイコンを押してエディターを開くと、以下のような設定が自動入力されるはずです。`"--ignore-robots-txt"` を追加して、`disabled`を`false`に変え、`autoApprove`に`fetch`を追加して保存します。Connecting...の表示の後、✓が表示されたら有効になっています。
