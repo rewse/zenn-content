@@ -18,11 +18,11 @@
   "license": "CC-BY-SA-4.0",
   "type": "commonjs",
   "dependencies": {
-    "textlint-rule-ja-space-around-phrase": ">=1.1.0",
+    "textlint-rule-ja-space-around-phrase": ">=1.1.1",
     "zenn-cli": "^0.5.4"
   },
   "devDependencies": {
-    "textlint-config-rewse": ">=1.4.0"
+    "textlint-config-rewse": ">=2.0.0"
   },
   "overrides": {
     "@hono/node-server": ">=2.0.5",
