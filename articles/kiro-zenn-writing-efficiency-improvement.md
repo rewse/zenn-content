@@ -92,7 +92,7 @@ MCP Servers パネルの右上の📝アイコンを押してエディターを�
 ![MCP Server Fetch 設定画面](/images/kiro-zenn-writing-efficiency-improvement/mcp-server-fetch-config.png)
 
 :::message
-何らかのエラーで`fetch`が有効にならない場合は、ウィンドウ右下のチャットボックスからKiroに「fetch MCPサーバーが動かないけど原因はなに？」と聞いてみてください
+何らかのエラーで`fetch`が有効にならない場合は、ウィンドウ右下のチャットボックスからKiroに「fetch MCP サーバーが動かないけど原因はなに？」と聞いてみてください
 :::
 
 ## KiroにZennの知識を教える: Agent Steering
@@ -217,7 +217,7 @@ inclusion: always
 
 ![コミットメッセージ標準初期画面](/images/kiro-zenn-writing-efficiency-improvement/commit-message-standards-initial.png)
 
-悪くはないのですが、fetch MCPサーバーを使用せずに記憶で書いているのと、英語になってしまいました。この点をチャットで修正します。
+悪くはないのですが、fetch MCP サーバーを使用せずに記憶で書いているのと、英語になってしまいました。この点をチャットで修正します。
 
 ```
 https://www.conventionalcommits.org/en/v1.0.0/ を参照して、
