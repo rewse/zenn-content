@@ -28,7 +28,7 @@ publication_name: aws_japan
 
 ## Kiro Power とは
 
-このコンテキスト消費の問題を解決するのが Kiro Power です。通常の MCP Server 設定では、使うかどうかに関わらず、Kiro起動時にすべてのツール定義がコンテキストに読み込まれます。ha-mcpのように80以上のツールを持つ MCP Server だと、それだけで19% (= 33 - 14) ものコンテキストを常時消費してしまいます。
+このコンテキスト消費の問題を解決するのが Kiro Power です。通常の MCP Server 設定では、使うかどうかに関わらず、Kiro起動時にすべてのツール定義がコンテキストに読み込まれます。ha-mcpのように80以上のツールを持つ MCP Server だと、それだけで 19% (= 33 - 14) ものコンテキストを常時消費してしまいます。
 
 Kiro Power は、この問題を動的読み込みで解決します。具体的には、`Home Assistant` のような特定キーワードがプロンプトに含まれたとき、初めて関連する MCP Server のツールと専門知識（ステアリング）が読み込まれます。つまり、Home Assistant と関係ない作業をしているときはコンテキストを消費せず、必要になったタイミングでKiroが Home Assistant の専門エージェントに変身するという仕組みです。
 
@@ -308,7 +308,7 @@ Agent: Uses ha_get_automation_traces to check execution history
 ![fetch MCP Server が有効になった状態](/images/kiro-zenn-writing-efficiency-improvement/mcp-server-fetch-config.png)
 
 :::message
-何らかのエラーでfetchが有効にならない場合は、ウィンドウ右下のチャットボックスからKiroに「fetch MCPサーバーが動かないけど原因はなに？」と聞いてみてください
+何らかのエラーでfetchが有効にならない場合は、ウィンドウ右下のチャットボックスからKiroに「fetch MCP サーバーが動かないけど原因はなに？」と聞いてみてください
 :::
 
 fetch MCP Server が使えるようになったら、Kiroに以下のように尋ねます。

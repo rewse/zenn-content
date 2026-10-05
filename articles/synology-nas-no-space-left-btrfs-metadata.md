@@ -155,7 +155,7 @@ nice -n 10 \
 
 ## まとめ
 
-Synology NAS で `No space left on device` エラーが発生した際は、単純な容量不足だけでなくメタデータ領域の不足も疑う必要があります。特にハードリンクを多用するバックアップツール（rsync-time-backup / duplicity / borgbackup / rdiff-backupなど）を使用している場合、大量のinodeを消費してメタデータ領域を圧迫する可能性があります。
+Synology NAS で `No space left on device` エラーが発生した際は、単純な容量不足だけでなくメタデータ領域の不足も疑う必要があります。特にハードリンクを多用するバックアップツール（rsync-time-backup / duplicity / borgbackup / rdiff-backup など）を使用している場合、大量のinodeを消費してメタデータ領域を圧迫する可能性があります。
 
 対処法：
 - `btrfs filesystem df` でメタデータ領域の使用状況を確認
