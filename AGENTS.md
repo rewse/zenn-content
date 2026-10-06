@@ -141,3 +141,7 @@ BREAKING CHANGE: Existing bookmark URLs may be affected.
 ```
 chore(article:docker-guide): schedule publication for 2024-12-01
 ```
+
+## Validation
+
+Before pushing, run `uvx pre-commit run --all-files`, which includes `npm run lint`, and commit any files the hooks reformat. Stage new files first, because `--all-files` skips untracked files. CI runs the same hooks, and `core.hooksPath` points at git-defender, so `pre-commit install` cannot run them at commit time.
