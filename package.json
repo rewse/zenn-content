@@ -28,6 +28,7 @@
     "@hono/node-server": ">=2.0.5",
     "brace-expansion": ">=5.0.8",
     "fast-uri": ">=4.1.1",
+    "gray-matter": "npm:@11ty/gray-matter@^3.0.0",
     "hono": ">=4.12.27",
     "ip-address": ">=10.1.1",
     "js-yaml": ">=5.2.2"
