@@ -142,6 +142,12 @@ BREAKING CHANGE: Existing bookmark URLs may be affected.
 chore(article:docker-guide): schedule publication for 2024-12-01
 ```
 
+## Dependencies
+
+`package.json` overrides `gray-matter` with `npm:@11ty/gray-matter`, the Eleventy fork, because zenn-cli depends on gray-matter 4.0.3, which calls `yaml.safeLoad` from js-yaml 3, and the `js-yaml` override would otherwise make every `zenn` command crash. Remove the override once zenn-cli no longer depends on gray-matter 4.
+
+Rate every update to `@11ty/gray-matter` at least medium risk and review it by hand. Its releases are published manually without npm provenance, so nothing ties a tarball to a commit in `11ty/gray-matter`: compare the published tarball with the tagged source, and run `npx zenn preview` to confirm that articles still render.
+
 ## Validation
 
 Before pushing, run `uvx pre-commit run --all-files`, which includes `npm run lint`, and commit any files the hooks reformat. Stage new files first, because `--all-files` skips untracked files. CI runs the same hooks, and `core.hooksPath` points at git-defender, so `pre-commit install` cannot run them at commit time.
