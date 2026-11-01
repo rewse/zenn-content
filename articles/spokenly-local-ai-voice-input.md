@@ -161,15 +161,13 @@ AIプロバイダーが準備できたら、AIプロンプトに戻り、〈メ�
 
 ## 余談: iOSでもSpokenlyを使いたい
 
-SpokenlyのiOS版はmacOS版と同じ機能があります。iOSでローカルLLMサーバーを動かすことはできませんが、内蔵の Apple Intelligence を選ぶことができます。ただし、私は自宅で常時起動している Mac Studio で LM Studio を動かして、それをラズパイで動いているApacheがプロキシーして、リモートからアクセスできるようにしています。詳しい手法の紹介は省きますが、プロキシーの設定は以下です。
+SpokenlyのiOS版はmacOS版と同じ機能があります。iOSでローカルLLMサーバーを動かすことはできませんが、内蔵の Apple Intelligence を選ぶことができます。ただし、私は自宅で常時起動している Mac Studio で LM Studio を動かして、それをラズパイで動いているApacheがプロキシーして、リモートからアクセスできるようにしています。詳しい手法の紹介は省きますが、構成は以下のとおりです。
 
 ```mermaid
 graph LR
     A[Spokenly<br/>iPhone / iPad] -->|HTTPS| B[Apache Proxy<br/>Raspberry Pi]
     B -->|HTTP| C[LM Studio<br/>Mac Studio]
 ```
-
-https://github.com/rewse/ansible-playbooks/blob/master/roles/lmstudio/files/lmstudio.rewse.jp.conf
 
 Spokenlyの特徴的な機能として [Clipboard Dictation](https://spokenly.app/docs/ios/clipboard-dictation) というものがあり、アクションボタンや背面タップからショートカットを起動することで、キーボードインターフェースを使わずに音声を入力できます。入力を終えたら再びショートカットを起動すると、整形化された文章がクリップボードに入ります。ペーストする手間はありますが、ライブアクティビティとして常駐したり、キーボードが増えたりする点が気になる方はこちらも良い選択肢です。
 
