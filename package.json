@@ -18,8 +18,8 @@
   "license": "CC-BY-SA-4.0",
   "type": "commonjs",
   "dependencies": {
-    "textlint-rule-ja-space-around-phrase": ">=1.1.1",
-    "zenn-cli": "^0.5.14"
+    "textlint-rule-ja-space-around-phrase": ">=1.1.2",
+    "zenn-cli": "^0.5.15"
   },
   "devDependencies": {
     "textlint-config-rewse": ">=2.0.0"
